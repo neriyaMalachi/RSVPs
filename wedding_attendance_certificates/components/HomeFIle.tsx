@@ -1,32 +1,42 @@
-"use client"
-import axios from 'axios';
-import { useState } from 'react';
+"use client";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [number, setNumber] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e:any) => {
+  const [number, setNumber] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [message, setMessage] = useState("");
+  const [isButtonDisabaled, setisButtonDisabaled] = useState(false);
+ 
+ useEffect(()=>{
+if(!number||!lastName){
+setisButtonDisabaled(true)
+}else{
+  setisButtonDisabaled(false)
+}
+ },[number,lastName])
+ 
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await axios.post('/api/addInvited', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ number, lastName }),
+    const res = await axios.post("/api/addInvited", {
+      number,
+      lastName,
     });
     // const data = await res.json();
     if (true) {
-      setMessage('User added successfully!');
+      setMessage("User added successfully!");
     } else {
-      setMessage('Error adding user.');
+      setMessage("Error adding user.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 text-black text-right">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
+    <div className="HomeFile flex flex-col items-center justify-center min-h-screen bg-gray-100 text-black text-right">
+      <h1 className="text-4xl font-extrabold  ">ישי & רונית</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white/35 p-8 rounded shadow-lg w-96"
+      >
         <h1 className="text-2xl font-bold mb-6">אישור הגעה</h1>
         <div className="mb-4">
           <label className="block text-gray-700">כמות מגיעים</label>
@@ -48,7 +58,8 @@ export default function Home() {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+          disabled={isButtonDisabaled}
+          className="w-full bg-red-500/75 text-white py-2 px-4 rounded hover:bg-red-400/75"
         >
           אישור
         </button>
