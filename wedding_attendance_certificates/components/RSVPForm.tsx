@@ -39,7 +39,9 @@ const RSVPForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='bg-yellow-50 flex items-center justify-center h-[90vh] '>
+
+    <form   onSubmit={handleSubmit}>
       <div>
         <label>Name</label>
         <input
@@ -95,6 +97,8 @@ const RSVPForm = () => {
       </div>
       <button type="submit">Submit</button>
     </form>
+    </div>
+
   );
 };
 
