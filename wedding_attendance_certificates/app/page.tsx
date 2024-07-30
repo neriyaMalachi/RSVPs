@@ -31,7 +31,7 @@ export default function Home() {
         </h2>
       </header>
 
-      <main className="bg-slate-100/20 h-[60%] flex flex-col justify-evenly items-center ">
+      <main className="bg-slate-100/20 h-[60%] w-[90%] rounded-md p-1 flex flex-col justify-evenly items-center ">
         <p className="text-2xl font-Bold_Text text-slate-950">
           {DayOfTheWedding}/{MonthOfTheWedding}/{YearOfTheWedding}
         </p>

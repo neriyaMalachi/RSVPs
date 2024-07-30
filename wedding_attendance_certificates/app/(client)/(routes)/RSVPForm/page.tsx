@@ -41,13 +41,14 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-yellow-100 text-black flex items-center justify-center h-[100vh] ">
-      <form onSubmit={handleSubmit}>
+    <div className="HomeFile  text-white text-right flex items-center justify-center h-[100vh]">
+      <form onSubmit={handleSubmit} className="bg-slate-200/35 w-[80%] p-3 flex flex-col justify-around rounded-sm">
         <div className="flex flex-col">
           <label>שם פרטי ומשפחה</label>
           <input
             type="text"
             name="text"
+            className="font-light text-right w-72 rounded-sm p-1 bg-slate-100/10 border border-red-500/70"
             placeholder="שם"
             value={formData.name}
             onChange={handleChange}
@@ -56,6 +57,7 @@ const Page = () => {
         <div className="flex flex-col">
           <label>אימייל</label>
           <input
+            className="font-light text-right w-72 rounded-sm p-1 bg-slate-100/10 border border-red-500/70"
             type="email"
             name="email"
             placeholder="name@gmail.com"
@@ -66,6 +68,7 @@ const Page = () => {
         <div className="flex flex-col">
           <label>טל</label>
           <input
+            className="font-light text-right w-72 rounded-sm p-1 bg-slate-100/10 border border-red-500/70"
             type="text"
             name="phone"
             placeholder="012-345-6789"
@@ -76,21 +79,23 @@ const Page = () => {
         <div className="flex flex-col">
           <label>כמות מגיעים</label>
           <input
+            className="font-light text-right w-72 rounded-sm p-1 bg-slate-100/10 border border-red-500/70"
+            placeholder="0"
             type="number"
-            name="0"
-            value={formData.guests}
+            // value={formData.guests}
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-72 rounded-sm p-1">
           <label>הוספה</label>
           <textarea
             name="notes"
-            value={formData.notes}
-            onChange={handleChange}
+            // value={formData.notes}
+            // onChange={handleChange}
+            className=" font-light text-right w-72 rounded-sm p-1 bg-slate-100/10 border border-red-500/70"
           ></textarea>
         </div>
-        <button type="submit">אישור</button>
+        <button type="submit" className="bg-rose-800/40 p-2 w-[100%] rounded-sm hover:bg-slate-100/10 mt-2">אישור</button>
       </form>
     </div>
   );
