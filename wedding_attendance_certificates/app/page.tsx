@@ -48,7 +48,7 @@ export default function Home() {
           {DescriptionOfTheWedding}
         </p>
       </main>
-      <footer className=" h-[20%] flex items-center">
+      <footer className=" h-[20%] flex items-start mt-3">
         <button
           className="bg-slate-50/70 font-Bold_Text text-black hover:bg-slate-100 p-2 rounded-md "
           onClick={() => {
