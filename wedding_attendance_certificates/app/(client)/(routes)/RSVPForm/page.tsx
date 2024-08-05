@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { ClipLoader } from "react-spinners";
+import { blob } from "stream/consumers";
 // import {TanksFile} from '@/app/(client)/(routes)/TanksFile'
 const Page = () => {
   const router = useRouter();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +29,7 @@ const Page = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setIsLoading(true);
     console.log(formData);
     e.preventDefault();
     try {
@@ -40,6 +43,7 @@ const Page = () => {
         notes: "",
       });
       toast.success("האישור עבר בהצלחה מחכים לראותכם ");
+      setIsLoading(false);
       router.push("/TanksFile");
     } catch (error) {
       console.error("There was an error submitting the RSVP", error);
@@ -47,18 +51,18 @@ const Page = () => {
   };
 
   return (
-    <div className="HomeFile  text-white text-right flex items-center justify-center h-[100vh]">
+    <div className="HomeFile  text-black text-right flex items-center justify-center h-[100vh]">
       <Toaster position="top-center" reverseOrder={false} />
       <form
         onSubmit={handleSubmit}
-        className=" bg-slate-200/35  font-Bold_Text w-[80%] p-5 flex flex-col justify-around items-center rounded-md "
+        className=" bg-slate-200/35  font-Bold_Text w-[90%] md:w-[50%] xl:w-[20%]   p-5 flex flex-col justify-around items-center rounded-md "
       >
         <div className="flex flex-col">
           <label>שם פרטי ומשפחה</label>
           <input
             type="text"
             name="name"
-            className=" font-light text-white text-right w-72 rounded-md p-1 bg-slate-100/10 border border-red-500/70"
+            className=" font-light text-right w-72 rounded-md p-1 bg-slate-100/10 border border-red-500/70"
             placeholder="שם"
             value={formData.name}
             onChange={handleChange}
@@ -113,13 +117,29 @@ const Page = () => {
               formData.attending = !formData.attending;
             }}
           />
-          <p>אישור שמגיעים</p>
+          <p>אישור הגעה</p>
         </div>
         <button
+          disabled={
+            formData.email && formData.name && formData.guests && formData.phone
+              ? false
+              : true
+          }
           type="submit"
-          className="bg-amber-400/30 p-2 w-[100%] rounded-md hover:bg-slate-100/10 mt-2"
+          className="bg-slate-50/70 p-2 w-[100%] rounded-md mt-2"
         >
-          אישור
+          {isLoading ? (
+            <ClipLoader
+              color={"blue"}
+              // loading={loading}
+              // cssOverride={override}
+              size={20}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
+            <p> אישור</p>
+          )}
         </button>
       </form>
     </div>

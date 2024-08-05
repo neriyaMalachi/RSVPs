@@ -1,7 +1,7 @@
 // pages/api/add.js
 import { dbConnect } from "@/lib/mongodb";
-import Guest from '@/pages/moduls/Guest'
-import { NextApiRequest, NextApiResponse } from 'next';
+import Guest from "@/pages/moduls/Guest";
+import { NextApiRequest, NextApiResponse } from "next";
 
 dbConnect();
 
@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   switch (method) {
-    case 'GET':
+    case "GET":
       try {
         const guests = await Guest.find({});
         res.status(200).json({ success: true, data: guests });
@@ -17,7 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(400).json({ success: false });
       }
       break;
-    case 'POST':
+    case "POST":
       try {
         const guest = await Guest.create(req.body);
         res.status(201).json({ success: true, data: guest });
@@ -29,4 +29,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).json({ success: false });
       break;
   }
-}
+};
