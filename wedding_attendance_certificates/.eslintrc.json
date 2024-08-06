@@ -1,3 +1,4 @@
 {
-  "extends": ["next/label","next/core-web-vitals"]
+  "extends": ["next/core-web-vitals"]
 }
+// "next/label",
