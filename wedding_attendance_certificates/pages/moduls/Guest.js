@@ -11,11 +11,12 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 const GuestSchema = new Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true },
   phone: { type: String, required: true },
   guests: { type: Number, required: true },
   attending: { type: Boolean, required: true },
   notes: { type: String },
 });
+// , unique: true
 
 export default mongoose.models.Guest ||('Guest', GuestSchema);
