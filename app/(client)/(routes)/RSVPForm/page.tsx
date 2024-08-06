@@ -4,8 +4,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ClipLoader } from "react-spinners";
-import { blob } from "stream/consumers";
-// import {TanksFile} from '@/app/(client)/(routes)/TanksFile'
+
 const Page = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -29,11 +28,16 @@ const Page = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setTimeout(() => {
+      setIsLoading(false);
+
+      toast.error("בעיה בפרטים ");
+    }, 5000);
     setIsLoading(true);
-    console.log(formData);
     e.preventDefault();
+    console.log(formData);
     try {
-      await axios.post("/api/guests", formData);
+      await axios.post("/api/guests", { body: formData });
       setFormData({
         name: "",
         email: "",
@@ -42,7 +46,6 @@ const Page = () => {
         attending: false,
         notes: "",
       });
-      toast.success("האישור עבר בהצלחה מחכים לראותכם ");
       setIsLoading(false);
       router.push("/TanksFile");
     } catch (error) {
