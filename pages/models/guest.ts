@@ -20,4 +20,4 @@ const GuestSchema = new Schema({
 // , unique: true
 
 export default mongoose.models.Guest ||
-  mongoose.model<IGuest>("guest", GuestSchema);
+  mongoose.model<IGuest>("Guest", GuestSchema);
