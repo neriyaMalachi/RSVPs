@@ -1,15 +1,15 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-export interface IGuest extends Document {
-  name: string;
-  email: string;
-  phone: string;
-  guests: number;
-  attending: boolean;
-  notes: string;
-}
+// export interface IGuest extends Document {
+//   name: string;
+//   email: string;
+//   phone: string;
+//   guests: number;
+//   attending: boolean;
+//   notes: string;
+// }
 
-const GuestSchema: Schema = new Schema({
+const GuestSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
@@ -18,4 +18,4 @@ const GuestSchema: Schema = new Schema({
   notes: { type: String },
 });
 
-export default mongoose.models.Guest || mongoose.model<IGuest>('Guest', GuestSchema);
+export default mongoose.models.Guest ||('Guest', GuestSchema);
