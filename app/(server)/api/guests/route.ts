@@ -1,6 +1,6 @@
 // pages/api/add.js
 import { dbConnect } from "@/lib/mongodb";
-import Guest from "@/models/Guest";
+import Guest from "@/app/(server)/models/Guest";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
