@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IGuest extends Document {
   name: string;
@@ -19,4 +19,5 @@ const GuestSchema = new Schema({
 });
 // , unique: true
 
-export default mongoose.models.Guest ||mongoose.model<IGuest>('Guest', GuestSchema);
+export default mongoose.models.Guest ||
+  mongoose.model<IGuest>("guest", GuestSchema);
