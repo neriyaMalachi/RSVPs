@@ -1,12 +1,11 @@
 // pages/api/add.js
 import { dbConnect } from "@/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 dbConnect();
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const guests = await Guest.find({});
     return NextResponse.json({ success: true, data: guests });
@@ -15,7 +14,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export async function POST(req: NextApiRequest, res: NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
   console.log("iifdj",req.body);
   
   try {
