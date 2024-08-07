@@ -37,17 +37,21 @@ const Page = () => {
     e.preventDefault();
     console.log(formData);
     try {
-      await axios.post("/api/guests", { body: formData });
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        guests: 0,
-        attending: false,
-        notes: "",
-      });
+      await axios.post("/api/guests",
+        { 
+          data:formData,
+
+        } )
+      // setFormData({
+      //   name: "",
+      //   email: "",
+      //   phone: "",
+      //   guests: 0,
+      //   attending: false,
+      //   notes: "",
+      // });
       setIsLoading(false);
-      router.push("/TanksFile");
+      // router.push("/TanksFile");
     } catch (error) {
       console.error("There was an error submitting the RSVP", error);
     }
