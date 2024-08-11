@@ -1,18 +1,28 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useStore } from "@/context/store";
 import { CiLocationOn } from "react-icons/ci";
 import { IoMdTime } from "react-icons/io";
+import axios from "axios";
 
 export default function Home() {
+  const [detels, setDetels] = useState();
   const router = useRouter();
+  useEffect(()=>{
 
-  const {
+    axios.get("/api/DitelsOfThePage").then(function (results) {
+      const data = results.data;
+      console.log(data.data);
+  
+      setDetels(data.data);
+    });
+  },[])
+  const { 
     DayOfTheWedding,
-    NmaeOfBride,
+    // NmaeOfBride,
     MonthOfTheWedding,
     NameOfGroom,
     YearOfTheWedding,
@@ -21,13 +31,14 @@ export default function Home() {
     MinuteOfTheWedding,
     DescriptionOfTheWedding,
   }: any = useStore();
+// console.log(detels.BrideName);
 
   return (
     <div className=" HomeFile text-white  h-[100vh] flex flex-col justify-around items-center ">
       <header className=" h-[20%] flex flex-col items-center justify-evenly ">
         <h1 className="font-Regular_Text text-xl">ברוכים הבאים לחתונת השנה</h1>
         <h2 className="text-3xl font-Bold_Text ">
-          {NmaeOfBride} & {NameOfGroom}
+          {} & {NameOfGroom}
         </h2>
       </header>
 
@@ -35,16 +46,15 @@ export default function Home() {
         <p className="text-2xl font-Bold_Text text-slate-950">
           {DayOfTheWedding}/{MonthOfTheWedding}/{YearOfTheWedding}
         </p>
-     <div className=" flex flex-col justify-around items-end  h-[13%]">
-
-        <p className=" flex font-Regular_Text">{LocationOfTheWedding} <CiLocationOn size={25} /></p>
-        <p className="flex font-Regular_Text">
-          {HourOfTheWedding}:{MinuteOfTheWedding} <IoMdTime size={22} />
-
-        </p>
-     </div>
+        <div className=" flex flex-col justify-around items-end  h-[13%]">
+          <p className=" flex font-Regular_Text">
+            {LocationOfTheWedding} <CiLocationOn size={25} />
+          </p>
+          <p className="flex font-Regular_Text">
+            {HourOfTheWedding}:{MinuteOfTheWedding} <IoMdTime size={22} />
+          </p>
+        </div>
         <p className="text-center font-Light_Text" datatype="הזמנה">
-        
           {DescriptionOfTheWedding}
         </p>
       </main>

@@ -23,38 +23,81 @@ const Page = () => {
     });
   };
   const handelSubmit = async (e: React.FormEvent) => {
-    console.log(formData.BrideName);
-    console.log(formData.Description);
-    console.log(formData.GroomName);
-    console.log(formData.Hour);
-    console.log(formData.Minute);
-    console.log(formData.img);
-    console.log(formData.Location);
-    console.log(formData.BrideName);
-    await axios.post("/api/DitelsOfThePage", formData);
 
-    
+    await axios
+      .put("/api/DitelsOfThePage", formData)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
   };
   return (
-      <form onSubmit={handelSubmit}>
-    <div className="bg-lime-100 w-full h-[100vh] flex flex-col justify-around items-center text-right">
+    <form onSubmit={handelSubmit}>
+      <div className="bg-lime-100 w-full h-[100vh] flex flex-col justify-around items-center text-right">
         <h1>מילוי מלל</h1>
-        <input className="text-right border shadow-md p-2  rounded-md" type="text" name="Title" placeholder="כותרת" onChange={handleChange} />
-        <input className="text-right border shadow-md p-2  rounded-md" type="text" name="BrideName" placeholder="שם החתן" onChange={handleChange} />
-        <input className="text-right border shadow-md p-2  rounded-md" type="text" name="GroomName" placeholder="שם הכלה" onChange={handleChange} />
-        <input className="text-right border shadow-md p-2  rounded-md" type="text" name="Location" placeholder="מיקום" onChange={handleChange} />
-        <input className="text-right border shadow-md p-2  rounded-md" type="number" name="Hour" placeholder="שעה " onChange={handleChange} />
-        <input className="text-right border shadow-md p-2  rounded-md" type="number" name="Minute" placeholder="דקות " onChange={handleChange} />
-        <input className="text-right border shadow-md p-2  rounded-md"
-        name="Description"
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="text"
+          name="Title"
+          placeholder="כותרת"
+          onChange={handleChange}
+        />
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="text"
+          name="BrideName"
+          placeholder="שם החתן"
+          onChange={handleChange}
+        />
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="text"
+          name="GroomName"
+          placeholder="שם הכלה"
+          onChange={handleChange}
+        />
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="text"
+          name="Location"
+          placeholder="מיקום"
+          onChange={handleChange}
+        />
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="number"
+          name="Hour"
+          placeholder="שעה "
+          onChange={handleChange}
+        />
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="number"
+          name="Minute"
+          placeholder="דקות "
+          onChange={handleChange}
+        />
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          name="Description"
           type="text"
           placeholder=" תיאור קצר על החתונה"
           onChange={handleChange}
         />
-        <input className="text-right border shadow-md p-2  rounded-md" type="url" name="img" placeholder=" תמונת רקע" onChange={handleChange} />
-      <button type="submit" className="border p-2 rounded-lg bg-green-300">אישור</button>
-    </div>
-      </form>
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="url"
+          name="img"
+          placeholder=" תמונת רקע"
+          onChange={handleChange}
+        />
+        <button type="submit" className="border p-2 rounded-lg bg-green-300">
+          אישור
+        </button>
+      </div>
+    </form>
   );
 };
 
