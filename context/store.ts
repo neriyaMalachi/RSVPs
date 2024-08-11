@@ -11,5 +11,14 @@ export const useStore = create((set) => ({
     "אנו מתרגשים להזמינכם לחגוג עמנו את יום חתונתנו! האירוע יתקיים ביום חמישי, 21 בספטמבר 2024, בשעה 17:00, בחוף השקיעה, מיאמי, פלורידה. אישורי הגעה יתקבלו בשמחה באתר שלנו. נשמח לראותכם ולחגוג יחד את הרגע המיוחד הזה!",
   NmaeOfBride: "יוסף",
   NameOfGroom: "ציפי",
-  ChengeDate: () => set((state: any) => ({ location: state.location })),
+  ChengeYearOfTheWedding: () => set((state: any) => ({ location: state.location })),
+  ChengeMonthOfTheWedding: () => set((state: any) => ({ location: state.location })),
+  ChengeDayOfTheWedding: () => set((state: any) => ({ location: state.location })),
+  ChengeHourOfTheWedding: () => set((state: any) => ({ location: state.location })),
+  ChengeMinuteOfTheWedding: () => set((state: any) => ({ location: state.location })),
+  ChengeLocationOfTheWedding: () => set((state: any) => ({ location: state.location })),
+  ChengeDescriptionOfTheWedding: () => set((state: any) => ({ location: state.location })),
+  ChengeNmaeOfBride: () => set((state: any) => ({ location: state.location })),
+  ChengeNameOfGroom: () => set((state: any) => ({ location: state.location })),
+
 }));

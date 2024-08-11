@@ -14,10 +14,10 @@ const GuestSchema = new mongoose.Schema({
   email: { type: String, required: true , unique: true},
   phone: { type: String, required: true },
   guests: { type: Number, required: true },
-  attending: { type: Boolean, required: true },
+  attending: { type: Boolean},
   notes: { type: String },
 });
 
 
 export default mongoose.models.Guest ||
-  mongoose.model("Guest", GuestSchema);
+  mongoose.model("guest", GuestSchema);

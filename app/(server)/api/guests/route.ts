@@ -2,7 +2,6 @@
 import { dbConnect } from "@/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 
 dbConnect();
 
@@ -15,18 +14,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-export async function POST(req: NextApiRequest, res: NextResponse) {
-  const {i} = req.body.data;
-
-  console.log("post: ",i );
-
+export async function POST(req: NextRequest, res: NextResponse) {
+  const data = await req.json();
   try {
-    const guest = await Guest.create(req.body.data);
-    console.log(guest);
-    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-
+    const guest = await Guest.create(data);
     return NextResponse.json({ status: 201, success: true });
-  } catch (error) {
-    return NextResponse.json({ message: error, status: 400 });
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message, status: 400 });
   }
 }
