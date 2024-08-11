@@ -24,6 +24,18 @@ const DetelsOfThePageSchema = new mongoose.Schema({
     min: 0,
     max: 23,
   },
+  Year: {
+    type: Number,
+    required: true,
+  },
+  Month: {
+    type: Number,
+    required: true,
+  },
+  Day: {
+    type: Number,
+    required: true,
+  },
   Minute: {
     type: Number,
     required: true,
@@ -35,11 +47,16 @@ const DetelsOfThePageSchema = new mongoose.Schema({
   },
   img: {
     type: String,
-    
   },
 });
-console.log("in of schema");
+
+console.log("Schema defined");
 
 // Create the model using the schema
-export default mongoose.models.DetelsOfThePage ||
-mongoose.model("detelsofthepage",DetelsOfThePageSchema)
+const DetelsOfThePage =
+  mongoose.models.DetelsOfThePage ||
+  mongoose.model("DetelsOfThePage", DetelsOfThePageSchema);
+
+console.log("Model initialized:", DetelsOfThePage);
+
+export default DetelsOfThePage;

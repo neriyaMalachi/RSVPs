@@ -9,6 +9,9 @@ const Page = () => {
     Title: "",
     Location: "",
     Hour: 0,
+    Year: 0,
+    Month: 0,
+    Day: 0,
     Minute: 0,
     Description: "",
     img: "",
@@ -22,8 +25,7 @@ const Page = () => {
       [name]: value,
     });
   };
-  const handelSubmit = async (e: React.FormEvent) => {
-
+  const handelSubmit = async () => {
     await axios
       .put("/api/DitelsOfThePage", formData)
       .then(function (response) {
@@ -63,6 +65,27 @@ const Page = () => {
           type="text"
           name="Location"
           placeholder="מיקום"
+          onChange={handleChange}
+        />
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="number"
+          name="year"
+          placeholder="שנה"
+          onChange={handleChange}
+        />{" "}
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="number"
+          name="Month"
+          placeholder="חודש"
+          onChange={handleChange}
+        />{" "}
+        <input
+          className="text-right border shadow-md p-2  rounded-md"
+          type="Number"
+          name="Day"
+          placeholder="יום"
           onChange={handleChange}
         />
         <input
