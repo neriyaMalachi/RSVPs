@@ -16,6 +16,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
+  
   try {
     const guest = await Guest.create(data);
     return NextResponse.json({ status: 201, success: true });

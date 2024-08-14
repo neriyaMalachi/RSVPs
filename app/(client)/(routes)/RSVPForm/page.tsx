@@ -14,6 +14,7 @@ const Page = () => {
     phone: "",
     guests: 0,
     attending: false,
+    side: "",
     notes: "",
   });
 
@@ -31,12 +32,14 @@ const Page = () => {
     setTimeout(() => {
       setIsLoading(false);
 
-      toast.error("בעיה בפרטים ");
+      toast.error("! בעיה בפרטים או שנרשמת כבר");
     }, 5000);
     setIsLoading(true);
     e.preventDefault();
     console.log(formData);
     try {
+      console.log(formData);
+
       await axios.post("/api/guests", formData);
       setFormData({
         name: "",
@@ -44,6 +47,7 @@ const Page = () => {
         phone: "",
         guests: 0,
         attending: false,
+        side: "",
         notes: "",
       });
       setIsLoading(false);
@@ -52,7 +56,9 @@ const Page = () => {
       console.error("There was an error submitting the RSVP", error);
     }
   };
-
+  const editSideFrends = (e: any) => {
+    setFormData((val) => ({ ...val, side: e.target.value }));
+  };
   return (
     <div className="HomeFile  text-black text-right flex items-center justify-center h-[100vh]">
       <Toaster position="top-center" reverseOrder={false} />
@@ -112,14 +118,37 @@ const Page = () => {
             className=" font-light text-right w-72 rounded-md p-1 bg-slate-100/10 border border-red-500/70"
           ></textarea>
         </div>
-        <div className="flex justify-evenly w-full">
-          <input
-            type="checkbox"
-            onClick={() => {
-              formData.attending = !formData.attending;
-            }}
-          />
-          <p>אישור הגעה</p>
+        <div className="flex justify-between w-72">
+          <select
+            onChange={editSideFrends}
+            className="rounded-md bg-slate-50/70   dropdown-content bg-base-100 rounded-box z-[1] w-32 p-2 shadow"
+          >
+            <option className="text-right hover:bg-slate-300 block p-1 w-full text-sm text-gray-700">
+              אחר
+            </option>
+            <option className="text-right hover:bg-slate-300 block p-1 w-full text-sm text-gray-700">
+              חברים
+            </option>
+            <option className="text-right hover:bg-slate-300 hover: bl w-fullock p-1 text-sm text-gray-700">
+              צד חתן
+            </option>
+            <option className="text-right hover:bg-slate-300 block p-1 w-full text-sm text-gray-700">
+              צד כלה
+            </option>
+          </select>
+
+          {/*  */}
+
+          <div className=" flex flex-col items-center justify-evenly w-32">
+            <p>אישור הגעה</p>
+
+            <input
+              type="checkbox"
+              onClick={() => {
+                formData.attending = !formData.attending;
+              }}
+            />
+          </div>
         </div>
         <button
           disabled={
@@ -128,7 +157,7 @@ const Page = () => {
               : true
           }
           type="submit"
-          className="bg-slate-50/70 p-2 w-[100%] rounded-md mt-2"
+          className="bg-slate-50/70 p-2 w-72 rounded-md mt-2"
         >
           {isLoading ? (
             <ClipLoader
