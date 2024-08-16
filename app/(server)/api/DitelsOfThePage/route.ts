@@ -7,6 +7,8 @@ export async function PUT(req: NextRequest) {
   const data = await req.json();
   try {
     await dbConnect();
+    console.log("in server fff");
+    
     const NewDetels = await DetelsOfThePageSchema.updateOne(
       { _id: id },
       {

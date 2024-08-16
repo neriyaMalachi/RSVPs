@@ -50,8 +50,6 @@ const DetelsOfThePageSchema = new mongoose.Schema({
   },
 });
 
-console.log("Schema defined");
-
 // Create the model using the schema
 const DetelsOfThePage =
   mongoose.models.DetelsOfThePage ||

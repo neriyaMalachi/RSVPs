@@ -29,17 +29,12 @@ const Page = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setTimeout(() => {
-      setIsLoading(false);
-
-      toast.error("! בעיה בפרטים או שנרשמת כבר");
-    }, 5000);
     setIsLoading(true);
     e.preventDefault();
     console.log(formData);
     try {
       console.log(formData);
-
+      
       await axios.post("/api/guests", formData);
       setFormData({
         name: "",
@@ -53,6 +48,12 @@ const Page = () => {
       setIsLoading(false);
       router.push("/TanksFile");
     } catch (error) {
+      setTimeout(() => {
+        setIsLoading(false);
+  
+        toast.error("! בעיה בפרטים או שנרשמת כבר");
+        // alert.("צור קשר עם המספר 0585202271")
+      }, 5000);
       console.error("There was an error submitting the RSVP", error);
     }
   };

@@ -2,7 +2,7 @@
 import { dbConnect } from "@/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
-
+require('@/app/(server)/models/Guest')
 dbConnect();
 
 export async function GET(req: NextRequest, res: NextResponse) {
@@ -15,6 +15,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  console.log("ppppp");
   const data = await req.json();
   
   try {
