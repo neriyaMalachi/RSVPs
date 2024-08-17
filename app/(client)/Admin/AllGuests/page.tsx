@@ -1,9 +1,31 @@
-import React from 'react'
+"use client";
+import NavBarAdmin from "@/pages/components/NavBarAdmin";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
+  const [guests, setGuests] = useState();
+useEffect(()=>{
+
+  axios.get('/api/guests').then(function(results){{
+    console.log(results.data);
+    setGuests(results.data)
+    
+  }}).catch(function(error){
+    console.log(error);
+    
+  })
+},[])
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <NavBarAdmin />
+      <div className="AllGuests">
+       {/* { guests.array.forEach((item:any) => {
+        <p>{item}</p>
+       })} */}
+      </div>
+    </div>
+  );
+};
 
-export default page
+export default Page;

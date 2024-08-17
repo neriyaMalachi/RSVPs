@@ -7,8 +7,9 @@ dbConnect();
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const guests = await Guest.find({});
-    return NextResponse.json({ success: true, data: guests });
+    
+    const guests = await Guest.find();
+    return NextResponse.json({ success: true,  guests });
   } catch (error) {
     return NextResponse.json({ success: false, status: 400 });
   }

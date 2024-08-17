@@ -5,10 +5,9 @@ import DetelsOfThePageSchema from "@/app/(server)/models/DitelsOfThePage";
 export async function PUT(req: NextRequest) {
   const id = "66b91c2fbc80906306b21597";
   const data = await req.json();
+  
   try {
     await dbConnect();
-    console.log("in server fff");
-    
     const NewDetels = await DetelsOfThePageSchema.updateOne(
       { _id: id },
       {
@@ -35,6 +34,7 @@ export async function PUT(req: NextRequest) {
   } catch (error: any) {
     return NextResponse.json({ message: error.message, status: 400 });
   }
+  
 }
 export async function GET(req: NextRequest, res: NextResponse) {
   const id = "66b91c2fbc80906306b21597";
@@ -63,8 +63,6 @@ export async function POST(req: NextRequest) {
   try {
     // Parse request body
     const data = await req.json();
-    console.log("jjjjjj",data);
-    
     // Connect to the database
     await dbConnect();
     

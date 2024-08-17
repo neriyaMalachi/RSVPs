@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <div className=" HomeFile  text-white  h-[100vh] flex flex-col justify-around items-center ">
       <header className=" h-[20%] flex flex-col items-center justify-evenly ">
-        <h1 className="font-Regular_Text text-xl">ברוכים הבאים לחתונת השנה</h1>
+        <h1 className="font-Regular_Text text-xl">{detels?.Title}</h1>
         <h2 className="text-3xl font-Bold_Text ">
           {detels?.BrideName} & {detels?.GroomName}
         </h2>
