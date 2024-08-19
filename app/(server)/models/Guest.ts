@@ -20,4 +20,4 @@ const GuestSchema = new mongoose.Schema({
 });
 console.log("schema");
 
-export default mongoose.models.Guest || mongoose.model("guest", GuestSchema);
+export default mongoose.models.Guest || mongoose.model("Guest", GuestSchema);
