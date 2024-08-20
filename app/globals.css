@@ -16,7 +16,11 @@
   }
 }
 
-
+.flexActionFLC{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 @layer utilities {
   .text-balance {

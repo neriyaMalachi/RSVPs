@@ -52,7 +52,6 @@ const Page = () => {
         setIsLoading(false);
   
         toast.error("! בעיה בפרטים או שנרשמת כבר");
-        // alert.("צור קשר עם המספר 0585202271")
       }, 5000);
       console.error("There was an error submitting the RSVP", error);
     }

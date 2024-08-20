@@ -11,10 +11,11 @@ const NavBarAdmin = () => {
       <GiHamburgerMenu size={24} />
     </button>
       {isOpen ? (
-        <div className="absolute flex flex-col text-center p-1 font-Regular_Text">
-          <a href="/Admin/AllGuests">אורחים</a>
-          <a href="/Admin/ControlerToGuests">פרטי חתונה</a>
-          <a href="">אחר</a>
+        <div className="absolute  bg-slate-100 flex flex-col text-center p-1 font-Regular_Text">
+          <a href="/Admin/AllGuests" className="h-6 w-28  hover:font-Bold_Text b">אורחים</a>
+          
+          <a href="/Admin/ControlerToGuests" className="hover:font-Bold_Text h-6 w-28">פרטי חתונה</a>
+          <a href="" className="hover:font-Bold_Text h-6 w-28">אחר</a>
         </div>
       ) : (
         <></>

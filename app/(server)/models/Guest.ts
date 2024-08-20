@@ -18,6 +18,5 @@ const GuestSchema = new mongoose.Schema({
   side: { type: String },
   notes: { type: String },
 });
-console.log("schema");
 
 export default mongoose.models.Guest || mongoose.model("Guest", GuestSchema);
