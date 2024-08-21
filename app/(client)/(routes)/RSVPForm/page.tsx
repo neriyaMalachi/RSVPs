@@ -64,7 +64,7 @@ const Page = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <form
         onSubmit={handleSubmit}
-        className=" bg-slate-200/35  font-Bold_Text w-[90%] md:w-[50%] xl:w-[20%]   p-5 flex flex-col justify-around items-center rounded-md "
+        className=" bg-slate-200/35  font-Bold_Text h-[60%] w-[90%] md:w-96   p-5 flex flex-col justify-around items-center rounded-md "
       >
         <div className="flex flex-col">
           <label>שם פרטי ומשפחה</label>

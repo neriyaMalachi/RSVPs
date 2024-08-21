@@ -1,25 +1,35 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
-const EditGuests = (guest:any) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        name: guest.GuestEdit.name,
-        email: guest.GuestEdit.email,
-        phone: guest.GuestEdit.phone,
-        guests: 0,
-        attending: false,
-        side: "",
-        notes: "",
-      });
-    
-console.log(formData);
+const EditGuests = (guest: any) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: 0,
+    guests: 0,
+    attending: false,
+    side: "",
+    notes: "",
+  });
+  useEffect(() => {
+    setFormData({
+      name: guest.GuestEdit.name,
+      email: guest.GuestEdit.email,
+      phone: guest.GuestEdit.phone,
+      guests: guest.GuestEdit.guests,
+      attending: guest.GuestEdit.attending,
+      side: guest.GuestEdit.side,
+      notes: guest.GuestEdit.notes,
+    });
+  }, [guest]);
+
+  console.log(guest.GuestEdit);
 
   const editguestsFunction = () => {
     console.log(formData);
-    
   };
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,7 +42,9 @@ console.log(formData);
   };
   return (
     <div className="border  h-full flex flex-col justify-evenly ">
-        <h1 className="text-2xl font-Bold_Text text-center">שינוי פירטי אורחים</h1>
+      <h1 className="text-2xl font-Bold_Text text-center">
+        שינוי פירטי אורחים
+      </h1>
       <div className=" text-black text-right flex items-center justify-center h-[100vh]">
         <Toaster position="top-center" reverseOrder={false} />
         <form
@@ -83,8 +95,43 @@ console.log(formData);
               onChange={handleChange}
             />
           </div>
-         
-         
+          <div className="flex justify-between w-72">
+            <select
+              // onChange={editSideFrends}
+              className="rounded-md bg-slate-50/70   dropdown-content bg-base-100 rounded-box z-[1] w-32 p-2 shadow"
+            >
+              <option className="text-right hover:bg-slate-300 block p-1 w-full text-sm text-gray-700">
+               {formData.side}
+              </option>
+              <option className={`${formData.side === "חברים" ?'hidden':''} text-right hover:bg-slate-300 block p-1 w-full text-sm text-gray-700`}>
+                חברים
+              </option>
+              <option className={`${formData.side === "צד חתן" ?'hidden':''} text-right hover:bg-slate-300 hover: bl w-fullock p-1 text-sm text-gray-700`}>
+                צד חתן
+              </option>
+              <option className={`${formData.side === "צד כלה" ?'hidden':''} text-right hover:bg-slate-300 block p-1 w-full text-sm text-gray-700`}>
+                צד כלה
+              </option>
+            </select>
+
+            {/*  */}
+
+            <div className=" flex flex-col items-center justify-evenly w-32">
+              <p>אישור הגעה</p>
+              {formData.attending ? (
+                <input
+                  type="checkbox"
+                  // onClick={() => {!attending}}
+                  checked
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  // onClick={() => {!attending}}
+                />
+              )}
+            </div>
+          </div>
           <button
             type="submit"
             className="bg-green-300/70 p-2 w-72 rounded-md mt-2"

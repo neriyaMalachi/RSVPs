@@ -39,10 +39,9 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-slate-100">
+    <div className="bg-slate-50">
     <NavBarAdmin/>
       <form onSubmit={handelSubmit}>
-     
         <div className=" w-full h-[100vh] flex flex-col justify-around items-center text-right">
           <h1 className="font-Bold_Text text-xl">פירטי החתונה</h1>
           <input

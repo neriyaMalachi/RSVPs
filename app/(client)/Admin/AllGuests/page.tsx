@@ -18,6 +18,7 @@ const Page = () => {
       });
   }, []);
   let indexGuests = 1;
+
   return (
     <div className="">
       <NavBarAdmin />
@@ -36,7 +37,7 @@ const Page = () => {
                   setGuestEdit(item);
                  
                 }}
-                className={`bg-slate-200 border h-96  shadow-black/40 flex justify-between p-2 mt-2 rounded-md`}
+                className={`bg-slate-200 border h-96 cursor-pointer hover:bg-slate-300  shadow-black/40 flex justify-between p-2 mt-2 rounded-md`}
                 key={item._id}
               >
                 <p className="text-left w-4 bg">{indexGuests++})</p>
@@ -51,7 +52,7 @@ const Page = () => {
           </div>
         </div>
         <div className="w-full md:w-[50%] h-[80vh] bg-slate-100">
-          <EditGuests GuestEdit={GuestEdit} />
+          <EditGuests GuestEdit={GuestEdit || ""} />
         </div>
       </div>
     </div>

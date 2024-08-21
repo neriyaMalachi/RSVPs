@@ -10,7 +10,7 @@ const page = () => {
 
   return (
     <div className="HomeFile  h-[100vh] flex flex-col justify-between items-center">
-      <div className=" bg-slate-200/35 h-96 w-[80%] mt-52 md:w-[50%] xl:w-[20%]  flex flex-col justify-around items-center text-center rounded-md font-Regular_Text text-white text-2xl">
+      <div className=" bg-slate-200/35 h-[60%]  w-[90%] mt-44 md:w-96  flex flex-col justify-around items-center text-center rounded-md font-Regular_Text text-white text-2xl">
         תודה רבה
         <br />
         מחכים לראותכם
