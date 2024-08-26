@@ -4,9 +4,12 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
+import { useStore } from "@/context/store";
 
-const EditGuests = ({guest, setRefresh, refresh}:any) => {
+const EditGuests = (guest: any) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { refresh, ChengeStatusFile }: any = useStore();
+
   const router = useRouter();
   const [formData, setFormData] = useState({
     _id: "",
@@ -37,8 +40,7 @@ const EditGuests = ({guest, setRefresh, refresh}:any) => {
       .put("/api/guests", formData)
       .then(function (res) {
         toast.success("עודכן בהצלחה ");
-        setRefresh(!refresh)
-        console.log("refresf",refresh);
+        ChengeStatusFile(true);
       })
       .catch(function (error) {
         console.log(error);

@@ -2,6 +2,8 @@
 import EditGuests from "@/pages/components/EditGuests";
 import Louding from "@/pages/components/Louding";
 import NavBarAdmin from "@/pages/components/NavBarAdmin";
+import { useStore } from "@/context/store";
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -9,9 +11,8 @@ const Page = () => {
   const [guests, setGuests] = useState([]);
   const [GuestEdit, setGuestEdit] = useState();
   const [louding, setLouding] = useState(true);
-  const [refresh, setRefresh] = useState(true);
-
-  console.log("refresh all Guests", refresh);
+  const { refresh }: any = useStore();
+  console.log(refresh);
 
   useEffect(() => {
     axios
@@ -23,7 +24,7 @@ const Page = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [refresh]);
   let indexGuests = 1;
 
   return (
@@ -70,11 +71,7 @@ const Page = () => {
           </div>
         </div>
         <div className="w-full md:w-[50%] h-[80vh] bg-slate-100">
-          <EditGuests
-            GuestEdit={GuestEdit || ""}
-            setRefresh={setRefresh}
-            refresh={refresh}
-          />
+          <EditGuests GuestEdit={GuestEdit || ""} />
         </div>
       </div>
     </div>

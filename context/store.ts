@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export const useStore = create((set) => ({
+  refresh:false,
   YearOfTheWedding: 2024,
   MonthOfTheWedding: 11,
   DayOfTheWedding: 21,
@@ -11,6 +12,8 @@ export const useStore = create((set) => ({
     "אנו מתרגשים להזמינכם לחגוג עמנו את יום חתונתנו! האירוע יתקיים ביום חמישי, 21 בספטמבר 2024, בשעה 17:00, בחוף השקיעה, מיאמי, פלורידה. אישורי הגעה יתקבלו בשמחה באתר שלנו. נשמח לראותכם ולחגוג יחד את הרגע המיוחד הזה!",
   NmaeOfBride: "יוסף",
   NameOfGroom: "ציפי",
+  ChengeStatusFile: () => set((state: any) => ({ refresh: state.refresh })),
+
   ChengeYearOfTheWedding: () => set((state: any) => ({ location: state.location })),
   ChengeMonthOfTheWedding: () => set((state: any) => ({ location: state.location })),
   ChengeDayOfTheWedding: () => set((state: any) => ({ location: state.location })),
