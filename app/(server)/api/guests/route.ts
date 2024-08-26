@@ -2,23 +2,10 @@
 import { dbConnect } from "@/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
-import { faker } from '@faker-js/faker'; 
+import { faker } from "@faker-js/faker";
 require("@/app/(server)/models/Guest");
 
 dbConnect();
-
-
-function generateGuestData() {
-  return {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    phone: faker.phone.number(),
-    guests: faker.number.int({ min: 1, max: 5 }),
-    attending: faker.datatype.boolean(),
-    side: faker.helpers.arrayElement(['bride', 'groom']),
-    notes: faker.lorem.sentence(),
-  };
-}
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
@@ -44,6 +31,43 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
 }
 
+export async function PUT(req: NextRequest, res: NextResponse) {
+  const data = await req.json();
+  try {
+    await dbConnect();
+    const NewGusts = await Guest.updateOne(
+      { _id: data._id },
+      {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        guests: data.guests,
+        attending: data.attending,
+        side: data.side,
+        notes: data.notes,
+      }
+    );
+    return NextResponse.json({
+      message: "successfull",
+      status: 200,
+      data: NewGusts,
+    });
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message, status: 400 });
+  }
+}
+
+// function generateGuestData() {
+//   return {
+//     name: faker.person.fullName(),
+//     email: faker.internet.email(),
+//     phone: faker.phone.number(),
+//     guests: faker.number.int({ min: 1, max: 5 }),
+//     attending: faker.datatype.boolean(),
+//     side: faker.helpers.arrayElement(['bride', 'groom']),
+//     notes: faker.lorem.sentence(),
+//   };
+// }
 // otomation for add 1000 gusts
 // let usersAdded = 0;
 //   for (let i = 0; i < 1000; i++) {

@@ -9,6 +9,9 @@ const Page = () => {
   const [guests, setGuests] = useState([]);
   const [GuestEdit, setGuestEdit] = useState();
   const [louding, setLouding] = useState(true);
+  const [refresh, setRefresh] = useState(true);
+
+  console.log("refresh all Guests", refresh);
 
   useEffect(() => {
     axios
@@ -46,19 +49,19 @@ const Page = () => {
                     onClick={() => {
                       setGuestEdit(item);
                     }}
-                    className={`bg-slate-200 border h-96 cursor-pointer hover:bg-slate-300  shadow-black/40 flex justify-between p-2 mt-2 rounded-md`}
+                    className={`bg-slate-200 border text-xs md:text-lg h-96 cursor-pointer hover:bg-slate-300  shadow-black/40 flex justify-between p-2 mt-2 rounded-md`}
                     key={item._id}
                   >
                     <p className="text-left w-4 bg">{indexGuests++})</p>
                     <p
                       className={` ${
-                        item.attending ? "text-black" : "text-red-400 text-lg"
-                      }`}
+                        item.attending ? "text-black" : "text-red-400 "
+                      } `}
                     >
                       {" "}
                       <strong>{item.name}</strong>
                     </p>
-                    <p>{item.phone}</p>
+                    <p className="">{item.phone}</p>
                     <p>{item.guests}</p>
                   </div>
                 ))}
@@ -67,7 +70,11 @@ const Page = () => {
           </div>
         </div>
         <div className="w-full md:w-[50%] h-[80vh] bg-slate-100">
-          <EditGuests GuestEdit={GuestEdit || ""} />
+          <EditGuests
+            GuestEdit={GuestEdit || ""}
+            setRefresh={setRefresh}
+            refresh={refresh}
+          />
         </div>
       </div>
     </div>

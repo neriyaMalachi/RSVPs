@@ -1,11 +1,15 @@
 "use client";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
 
-const EditGuests = (guest: any) => {
+const EditGuests = ({guest, setRefresh, refresh}:any) => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const [formData, setFormData] = useState({
+    _id: "",
     name: "",
     email: "",
     phone: 0,
@@ -16,6 +20,7 @@ const EditGuests = (guest: any) => {
   });
   useEffect(() => {
     setFormData({
+      _id: guest.GuestEdit._id,
       name: guest.GuestEdit.name,
       email: guest.GuestEdit.email,
       phone: guest.GuestEdit.phone,
@@ -26,10 +31,18 @@ const EditGuests = (guest: any) => {
     });
   }, [guest]);
 
-  console.log(guest.GuestEdit);
-
-  const editguestsFunction = () => {
-    console.log(formData);
+  const editguestsFunction = async (e: any) => {
+    e.preventDefault();
+    await axios
+      .put("/api/guests", formData)
+      .then(function (res) {
+        toast.success("עודכן בהצלחה ");
+        setRefresh(!refresh)
+        console.log("refresf",refresh);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,6 +55,7 @@ const EditGuests = (guest: any) => {
   };
   return (
     <div className="border  h-full flex flex-col justify-evenly ">
+      <Toaster position="top-center" reverseOrder={false} />
       <h1 className="text-2xl font-Bold_Text text-center">
         שינוי פירטי אורחים
       </h1>
@@ -58,7 +72,7 @@ const EditGuests = (guest: any) => {
               name="name"
               className=" font-light text-right w-72 rounded-md p-1 bg-slate-100/10 border border-red-500/70"
               placeholder="שם"
-              value={formData.name}
+              value={formData.name || ""}
               onChange={handleChange}
             />
           </div>
@@ -69,7 +83,7 @@ const EditGuests = (guest: any) => {
               type="email"
               name="email"
               placeholder="name@gmail.com"
-              value={formData.email}
+              value={formData.email || ""}
               onChange={handleChange}
             />
           </div>
@@ -80,7 +94,7 @@ const EditGuests = (guest: any) => {
               type="number"
               name="phone"
               placeholder="012-345-6789"
-              value={formData.phone}
+              value={formData.phone || ""}
               onChange={handleChange}
             />
           </div>
@@ -91,7 +105,7 @@ const EditGuests = (guest: any) => {
               placeholder="0"
               type="number"
               name="guests"
-              value={formData.guests}
+              value={formData.guests || 0}
               onChange={handleChange}
             />
           </div>
@@ -126,18 +140,14 @@ const EditGuests = (guest: any) => {
               </option>
             </select>
 
-
             <div className=" flex flex-col items-center justify-evenly w-32">
               <p>אישור הגעה</p>
               <input
                 type="checkbox"
-                {...(formData.attending
-                  ? {
-                      checked: true,
-                    }
-                  : {
-                      checked: false,
-                    })}
+                checked={formData.attending || false}
+                onChange={(e) =>
+                  setFormData({ ...formData, attending: e.target.checked })
+                }
               />
             </div>
           </div>
@@ -148,8 +158,6 @@ const EditGuests = (guest: any) => {
             {isLoading ? (
               <ClipLoader
                 color={"blue"}
-                // loading={loading}
-                // cssOverride={override}
                 size={20}
                 aria-label="Loading Spinner"
                 data-testid="loader"
