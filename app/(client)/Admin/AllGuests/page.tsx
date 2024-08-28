@@ -6,13 +6,13 @@ import { useStore } from "@/context/store";
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Futer from "@/pages/components/Futer";
 
 const Page = () => {
   const [guests, setGuests] = useState([]);
   const [GuestEdit, setGuestEdit] = useState();
   const [louding, setLouding] = useState(true);
   const { refresh }: any = useStore();
-  console.log(refresh);
 
   useEffect(() => {
     axios
@@ -28,10 +28,10 @@ const Page = () => {
   let indexGuests = 1;
 
   return (
-    <div className="">
+    <div className="w-full p-2">
       <NavBarAdmin />
 
-      <div className="flex flex-col md:flex-row ">
+      <div className="flex flex-col items-end m-2 md:flex-row ">
         <div className=" w-full md:w-[50%]">
           <div className="flexActionFLC font-Bold_Text w-[95%]  ">
             <p></p>
@@ -39,7 +39,7 @@ const Page = () => {
             <p>פלאפון</p>
             <p>כמות</p>
           </div>
-          <div className="AllGuests w-[95%]  overflow-auto  border-t-4 border-b-4 border-red-500 h-[80vh] flex flex-col justify-around bg-slate-100 shadow-md m-2">
+          <div className="AllGuests w-full  overflow-auto  border-t-4 border-b-4 border-red-500 h-[80vh] flex flex-col justify-around bg-slate-100 shadow-md ">
             {louding ? (
               <Louding />
             ) : (
@@ -70,9 +70,12 @@ const Page = () => {
             )}
           </div>
         </div>
-        <div className="w-full md:w-[50%] h-[80vh] bg-slate-100">
+        <div className="w-full md:w-[50%] h-[80vh] bg-slate-200">
           <EditGuests GuestEdit={GuestEdit || ""} />
         </div>
+      </div>
+      <div className="w-full  h-28 bg-slate-200 ">
+       <Futer/>
       </div>
     </div>
   );

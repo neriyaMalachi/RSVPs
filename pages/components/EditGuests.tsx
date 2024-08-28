@@ -39,8 +39,8 @@ const EditGuests = (guest: any) => {
     await axios
       .put("/api/guests", formData)
       .then(function (res) {
+        ChengeStatusFile(!refresh);
         toast.success("עודכן בהצלחה ");
-        ChengeStatusFile(true);
       })
       .catch(function (error) {
         console.log(error);
