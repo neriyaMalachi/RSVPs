@@ -36,6 +36,8 @@ const EditGuests = (guest: any) => {
 
   const editguestsFunction = async (e: any) => {
     e.preventDefault();
+    console.log(formData);
+
     await axios
       .put("/api/guests", formData)
       .then(function (res) {
@@ -55,8 +57,12 @@ const EditGuests = (guest: any) => {
       [name]: value,
     });
   };
+
+  const editSideFrends = (e: any) => {
+    setFormData((val) => ({ ...val, side: e.target.value }));
+  };
   return (
-    <div className="border  h-full flex flex-col justify-evenly ">
+    <div className="h-full flex flex-col justify-evenly ">
       <Toaster position="top-center" reverseOrder={false} />
       <h1 className="text-2xl font-Bold_Text text-center">
         שינוי פירטי אורחים
@@ -113,7 +119,7 @@ const EditGuests = (guest: any) => {
           </div>
           <div className="flex justify-between w-72">
             <select
-              // onChange={editSideFrends}
+              onChange={editSideFrends}
               className="rounded-md bg-slate-50/70   dropdown-content bg-base-100 rounded-box z-[1] w-32 p-2 shadow"
             >
               <option className="text-right hover:bg-slate-300 block p-1 w-full text-sm text-gray-700">

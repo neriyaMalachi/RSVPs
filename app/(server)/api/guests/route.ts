@@ -56,6 +56,22 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ message: error.message, status: 400 });
   }
 }
+export async function DELETE(req: NextRequest, res: NextResponse) {
+  const DeleteGusts = await req.json();
+  console.log(DeleteGusts);
+  try {
+    dbConnect();
+
+    await dbConnect();
+    await Guest.deleteOne();
+    return NextResponse.json({
+      message: "Deleted Successfull",
+      status: 200,
+    });
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message, status: 400 });
+  }
+}
 
 // function generateGuestData() {
 //   return {

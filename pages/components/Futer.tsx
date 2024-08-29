@@ -1,53 +1,60 @@
 "use client";
+import { useStore } from "@/context/store";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-
-
 const Futer = () => {
-  const [AllGuests, setAllGuests] = useState([]);
-  const [countGroom, setCountGroom] = useState<Number>(0);
+  const [AllGuests, setAllGuests] = useState<any[]>([]);
+  const [countGroom, setCountGroom] = useState(1);
+  const { refresh }: any = useStore();
+  var countOfAFrendtsSide = 0;
+  var countOfAGroomSide = 0;
+  var countOfABrideSide = 0;
 
-  //   const sumGroom = () => {
-  //     for (let i = 0; i < AllGuests.length; i++) {
-  //       if (AllGuests[i] === "groom") {
-  //         setCountGroom(countGroom++);
-  //       }
-  //     }
-  //     setCountGroom(4);
-  //     return 4;
-  //   };
-  const guestCounts = AllGuests.reduce((acc: any, guest: any) => {
-    acc[guest.side] = (acc[guest.side] || 0) + 1;
-    return acc;
-  }, {});
-  console.log(guestCounts.groom);
-
-  useEffect(() => {
-    axios
+  const sumGroom = () => {
+    for (let i = 0; i < AllGuests.length; i++) {
+      if (AllGuests[i].side === "חברים")
+        countOfAFrendtsSide += AllGuests[i].guests;
+      else if (AllGuests[i].side === "צד כלה")
+        countOfAGroomSide += AllGuests[i].guests;
+      else if (AllGuests[i].side === "צד חתן")
+        countOfABrideSide += AllGuests[i].guests;
+    }
+  };
+  const getAllGuests = async () => {
+    await axios
       .get("/api/guests")
       .then(function (results) {
-        console.log(results.data.guests);
         setAllGuests(results.data.guests);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  };
+  useEffect(() => {
+    getAllGuests();
+  }, [refresh]);
+  sumGroom();
 
   return (
-    <div className="flex justify-around items-center">
-      <div className="">חברים</div>
-      <div className="">צד כלה</div>
-      <div className="">
+    <div className="flex justify-around  h-full items-center">
+      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
+        חברים
+        <p>{countOfAFrendtsSide}</p>
+      </div>
+      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
+        <p>צד כלה</p>
+        <p>{countOfAGroomSide}</p>
+      </div>
+      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
         <p>צד חתן</p>
-        {guestCounts.groom}
+        <p>{countOfABrideSide}</p>
       </div>
 
-      <div className="flex flex-col  bg-slate-400">
+      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
         <p>סך הכל</p>
 
-        {AllGuests.length || ""}
+        {countOfABrideSide + countOfAGroomSide + countOfAFrendtsSide}
       </div>
     </div>
   );

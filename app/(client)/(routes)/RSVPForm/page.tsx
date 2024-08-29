@@ -59,6 +59,8 @@ const Page = () => {
   const editSideFrends = (e: any) => {
     setFormData((val) => ({ ...val, side: e.target.value }));
   };
+
+  
   return (
     <div className="HomeFile  text-black text-right flex items-center justify-center h-[100vh]">
       <Toaster position="top-center" reverseOrder={false} />
