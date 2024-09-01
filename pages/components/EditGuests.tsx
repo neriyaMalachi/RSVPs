@@ -33,7 +33,6 @@ const EditGuests = (guest: any) => {
       notes: guest.GuestEdit.notes,
     });
   }, [guest]);
-
   const editguestsFunction = async (e: any) => {
     e.preventDefault();
     console.log(formData);
@@ -57,10 +56,12 @@ const EditGuests = (guest: any) => {
       [name]: value,
     });
   };
-
   const editSideFrends = (e: any) => {
     setFormData((val) => ({ ...val, side: e.target.value }));
   };
+
+
+
   return (
     <div className="h-full flex flex-col justify-evenly ">
       <Toaster position="top-center" reverseOrder={false} />
@@ -177,6 +178,7 @@ const EditGuests = (guest: any) => {
         </form>
       </div>
     </div>
+
   );
 };
 

@@ -3,6 +3,8 @@ import { dbConnect } from "@/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
 import { faker } from "@faker-js/faker";
+import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
+import axios from "axios";
 require("@/app/(server)/models/Guest");
 
 dbConnect();
@@ -23,6 +25,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
 export async function POST(req: NextRequest, res: NextResponse) {
   dbConnect();
   const data = await req.json();
+ 
+  sendRegistrationSuccessEmail(data.email);
+
   try {
     const guest = await Guest.create(data);
     return NextResponse.json({ status: 201, success: true });
@@ -58,12 +63,15 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 }
 export async function DELETE(req: NextRequest, res: NextResponse) {
   const DeleteGusts = await req.json();
-  console.log(DeleteGusts);
+  console.log("data: ", DeleteGusts);
   try {
-    dbConnect();
-
     await dbConnect();
-    await Guest.deleteOne();
+    const result = await Guest.findByIdAndDelete(DeleteGusts.id);
+    console.log(result);
+
+    if (result.deletedCount === 0) {
+      return NextResponse.json({ message: "Guest not found", status: 404 });
+    }
     return NextResponse.json({
       message: "Deleted Successfull",
       status: 200,

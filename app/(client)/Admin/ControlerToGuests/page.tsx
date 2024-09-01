@@ -39,90 +39,100 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-slate-50">
-    <NavBarAdmin/>
-      <form onSubmit={handelSubmit}>
-        <div className=" w-full h-[100vh] flex flex-col justify-around items-center text-right">
-          <h1 className="font-Bold_Text text-xl">פירטי החתונה</h1>
+    <div className="bg-gray-50 min-h-screen flex flex-col">
+      <NavBarAdmin />
+      <form onSubmit={handelSubmit} className="flex-grow">
+        <div className="container mx-auto p-6 flex flex-col justify-around items-center text-right space-y-6">
+          <h1 className="font-semibold text-2xl text-gray-800">פרטי החתונה</h1>
+
           <input
-            className="text-right border shadow-md p-2  rounded-md"
+            className="w-full max-w-md bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
             type="text"
             name="Title"
             placeholder="כותרת"
             onChange={handleChange}
           />
+
           <input
-            className="text-right border shadow-md p-2  rounded-md"
+            className="w-full max-w-md bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
             type="text"
             name="BrideName"
             placeholder="שם החתן"
             onChange={handleChange}
           />
+
           <input
-            className="text-right border shadow-md p-2  rounded-md"
+            className="w-full max-w-md bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
             type="text"
             name="GroomName"
             placeholder="שם הכלה"
             onChange={handleChange}
           />
+
           <input
-            className="text-right border shadow-md p-2  rounded-md"
+            className="w-full max-w-md bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
             type="text"
             name="Location"
             placeholder="מיקום"
             onChange={handleChange}
           />
+
+          <div className="w-full max-w-md grid grid-cols-2 gap-4">
+            <input
+              className="bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
+              type="number"
+              name="Year"
+              placeholder="שנה"
+              onChange={handleChange}
+            />
+            <input
+              className="bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
+              type="number"
+              name="Month"
+              placeholder="חודש"
+              onChange={handleChange}
+            />
+            <input
+              className="bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
+              type="Number"
+              name="Day"
+              placeholder="יום"
+              onChange={handleChange}
+            />
+            <input
+              className="bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
+              type="number"
+              name="Hour"
+              placeholder="שעה"
+              onChange={handleChange}
+            />
+            <input
+              className="bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
+              type="number"
+              name="Minute"
+              placeholder="דקות"
+              onChange={handleChange}
+            />
+          </div>
+
           <input
-            className="text-right border shadow-md p-2  rounded-md"
-            type="number"
-            name="Year"
-            placeholder="שנה"
-            onChange={handleChange}
-          />{" "}
-          <input
-            className="text-right border shadow-md p-2  rounded-md"
-            type="number"
-            name="Month"
-            placeholder="חודש"
-            onChange={handleChange}
-          />{" "}
-          <input
-            className="text-right border shadow-md p-2  rounded-md"
-            type="Number"
-            name="Day"
-            placeholder="יום"
-            onChange={handleChange}
-          />
-          <input
-            className="text-right border shadow-md p-2  rounded-md"
-            type="number"
-            name="Hour"
-            placeholder="שעה "
-            onChange={handleChange}
-          />
-          <input
-            className="text-right border shadow-md p-2  rounded-md"
-            type="number"
-            name="Minute"
-            placeholder="דקות "
-            onChange={handleChange}
-          />
-          <input
-            className="text-right border shadow-md p-2  rounded-md"
+            className="w-full max-w-md bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
             type="url"
             name="img"
-            placeholder=" תמונת רקע"
+            placeholder="תמונת רקע"
             onChange={handleChange}
           />
+
           <textarea
-            className="text-right border shadow-md p-2  rounded-md"
+            className="w-full max-w-md bg-white border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 focus:ring-2 focus:ring-yellow-200"
             name="Description"
-            placeholder=" תיאור קצר על החתונה"
+            placeholder="תיאור קצר על החתונה"
             onChange={handleChange}
           />
+
           <button
             type="submit"
-            className="border p-2 rounded-lg bg-yellow-200/60 w-52"
+            className="w-full max-w-xs bg-yellow-300 text-gray-700 font-semibold rounded-md shadow-md py-3 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200"
           >
             אישור
           </button>
