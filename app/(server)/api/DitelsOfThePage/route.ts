@@ -5,7 +5,6 @@ import DetelsOfThePageSchema from "@/app/(server)/models/DitelsOfThePage";
 export async function PUT(req: NextRequest) {
   const id = "66b91c2fbc80906306b21597";
   const data = await req.json();
-  
   try {
     await dbConnect();
     const NewDetels = await DetelsOfThePageSchema.updateOne(
@@ -34,7 +33,6 @@ export async function PUT(req: NextRequest) {
   } catch (error: any) {
     return NextResponse.json({ message: error.message, status: 400 });
   }
-  
 }
 export async function GET(req: NextRequest, res: NextResponse) {
   const id = "66b91c2fbc80906306b21597";
@@ -65,7 +63,7 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     // Connect to the database
     await dbConnect();
-    
+
     // Create a new document using the schema
     const newDetels = new DetelsOfThePageSchema({
       BrideName: data.BrideName,

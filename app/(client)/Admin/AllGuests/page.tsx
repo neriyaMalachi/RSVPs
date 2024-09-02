@@ -15,6 +15,7 @@ const Page = () => {
   const [louding, setLouding] = useState(true);
   const { refresh, ChengeStatusFile }: any = useStore();
   const [nameFilter, steNameFilter] = useState<string>("");
+  let indexGuests = 1;
 
   useEffect(() => {
     axios
@@ -27,9 +28,13 @@ const Page = () => {
         console.log(error);
       });
   }, [refresh]);
-  let indexGuests = 1;
+
   const deleteGustse = async (id: AxiosRequestConfig) => {
-    console.log("id::", id);
+    const isConfirmed = window.confirm("האם אתה בטוח שאתה רוצה למחוק את האורח הזה?");
+  
+  if (!isConfirmed) {
+    return;
+  }
 
     await axios
       .delete("/api/guests", { data: { id } })
@@ -48,9 +53,7 @@ const Page = () => {
     <div className="w-full p-4 bg-gray-100">
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="flex mb-4">
         <NavBarAdmin />
-      </div>
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center m-2">
         <div className="w-full md:w-1/2 mb-4 md:mb-0">
@@ -117,12 +120,12 @@ const Page = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 rounded-xl h-[70vh] bg-gray-200 shadow-lg p-4">
+        <div className="w-full md:w-1/2 h-[80vh]  p-4">
           <EditGuests GuestEdit={GuestEdit || ""} />
         </div>
       </div>
 
-      <div className="w-full rounded-xl h-28 bg-gray-200 mt-4 shadow-lg">
+      <div className="w-full rounded-md h-28 bg-gray-200 mt-4 shadow-lg">
         <Futer />
       </div>
     </div>

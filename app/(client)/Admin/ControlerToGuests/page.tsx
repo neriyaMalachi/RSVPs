@@ -2,6 +2,7 @@
 import NavBarAdmin from "@/pages/components/NavBarAdmin";
 import axios from "axios";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -27,11 +28,14 @@ const Page = () => {
       [name]: value,
     });
   };
-  const handelSubmit = async () => {
+  const handelSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     await axios
       .put("/api/DitelsOfThePage", formData)
       .then(function (response) {
         console.log(response);
+        toast.success("פרטים עודכנו");
       })
       .catch(function (error: any) {
         console.log(error);
@@ -41,6 +45,8 @@ const Page = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
       <NavBarAdmin />
+      <Toaster position="top-center" reverseOrder={false} />
+
       <form onSubmit={handelSubmit} className="flex-grow">
         <div className="container mx-auto p-6 flex flex-col justify-around items-center text-right space-y-6">
           <h1 className="font-semibold text-2xl text-gray-800">פרטי החתונה</h1>
@@ -132,7 +138,7 @@ const Page = () => {
 
           <button
             type="submit"
-            className="w-full max-w-xs bg-yellow-300 text-gray-700 font-semibold rounded-md shadow-md py-3 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200"
+            className="w-full max-w-xs bg-yellow-200 text-gray-700 font-semibold rounded-md shadow-md py-3 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-200"
           >
             אישור
           </button>

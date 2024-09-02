@@ -37,26 +37,30 @@ const Futer = () => {
   sumGroom();
 
   return (
-    <div className="flex justify-around  h-full items-center">
-      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
-        חברים
-        <p>{countOfAFrendtsSide}</p>
-      </div>
-      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
-        <p>צד כלה</p>
-        <p>{countOfAGroomSide}</p>
-      </div>
-      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
-        <p>צד חתן</p>
-        <p>{countOfABrideSide}</p>
-      </div>
-
-      <div className="flex flex-col items-center font-Bold_Text text-xs md:text-xl ">
-        <p>סך הכל</p>
-
-        {countOfABrideSide + countOfAGroomSide + countOfAFrendtsSide}
-      </div>
+    <div className="flex justify-around h-full items-center space-x-4">
+    <div className="flex flex-col items-center font-Bold_Text text-sm md:text-lg p-4 w-24 md:w-32">
+      <p className="text-gray-600">חברים</p>
+      <p className="text-black text-2xl md:text-3xl">{countOfAFrendtsSide}</p>
     </div>
+  
+    <div className="flex flex-col items-center font-Bold_Text text-sm md:text-lg p-4 w-24 md:w-32">
+      <p className="text-gray-600">צד כלה</p>
+      <p className="text-black text-2xl md:text-3xl">{countOfAGroomSide}</p>
+    </div>
+  
+    <div className="flex flex-col items-center font-Bold_Text text-sm md:text-lg p-4 w-24 md:w-32">
+      <p className="text-gray-600">צד חתן</p>
+      <p className="text-black text-2xl md:text-3xl">{countOfABrideSide}</p>
+    </div>
+  
+    <div className="flex flex-col items-center font-Bold_Text text-sm md:text-lg p-4 w-24 md:w-32">
+      <p className="text-gray-600">סך הכל</p>
+      <p className="text-black text-2xl md:text-3xl">
+        {countOfABrideSide + countOfAGroomSide + countOfAFrendtsSide}
+      </p>
+    </div>
+  </div>
+  
   );
 };
 
