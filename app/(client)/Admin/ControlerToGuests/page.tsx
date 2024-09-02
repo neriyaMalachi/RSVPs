@@ -1,5 +1,4 @@
 "use client";
-import NavBarAdmin from "@/pages/components/NavBarAdmin";
 import axios from "axios";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -44,7 +43,6 @@ const Page = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
-      <NavBarAdmin />
       <Toaster position="top-center" reverseOrder={false} />
 
       <form onSubmit={handelSubmit} className="flex-grow">

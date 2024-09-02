@@ -1,7 +1,6 @@
 "use client";
 import EditGuests from "@/pages/components/EditGuests";
 import Louding from "@/pages/components/Louding";
-import NavBarAdmin from "@/pages/components/NavBarAdmin";
 import { useStore } from "@/context/store";
 import { MdDelete } from "react-icons/md";
 import axios, { AxiosRequestConfig } from "axios";
@@ -49,13 +48,11 @@ const Page = () => {
         toast.success(error);
       });
   };
+  
   return (
-    <div className="w-full p-4 bg-gray-100">
+    <div className="w-full p-4 bg-gray-100 ">
       <Toaster position="top-center" reverseOrder={false} />
-
-        <NavBarAdmin />
-
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center m-2">
+      <div className="flex flex-col mt-5 md:flex-row justify-between items-start md:items-center m-2">
         <div className="w-full md:w-1/2 mb-4 md:mb-0">
           <div className="flex flex-col w-full">
             <div className="w-full mb-2">

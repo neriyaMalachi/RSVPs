@@ -24,8 +24,23 @@ interface PageDetails {
   img?: string;
 }
 
+const props = () => {
+  axios
+    .get("/api/DitelsOfThePage")
+    .then((res) => {
+      console.log("in the function props", res);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
 // פונקציה לשליחת מייל אישור הרשמה
 const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
+  const response = await axios.get("/api/DitelsOfThePage");
+  const details: PageDetails = response.data.data;
+
+  console.log("in html email", details);
+
   const mailOptions = {
     from: "nmambition2022@gmail.com",
     to: GuestsEmail,

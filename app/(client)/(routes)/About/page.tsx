@@ -2,7 +2,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <div className="bg-white p-6 md:p-10 rounded-lg text-right shadow-lg text-gray-800 max-w-4xl mx-auto my-10 leading-relaxed">
+    <div className="bg-white p-6 md:p-10 rounded-lg text-right shadow-lg text-gray-800 max-w-4xl mx-auto  leading-relaxed">
     <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">
       אודות המערכת
     </h1>
