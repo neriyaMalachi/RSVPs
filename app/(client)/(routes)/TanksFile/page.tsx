@@ -15,10 +15,11 @@ const page = () => {
         <br />
         מחכים לראותכם
       </div>
-      <Link href={"https://nm-ambition.com/"} className="text-white" >
-
-      N.M AMBITION © 2024 כל הזכיות שמורות 
-      </Link>
+      <footer className="w-full flex justify-center items-center py-4">
+    <Link href="https://nm-ambition.com/" className="text-sm text-white hover:underline">
+      N.M AMBITION © 2024 כל הזכויות שמורות
+    </Link>
+  </footer>
     </div>
   );
 };
