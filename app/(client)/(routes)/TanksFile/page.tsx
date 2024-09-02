@@ -4,10 +4,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const page = () => {
-  // axios.get("/api/guests").then(function (response) {
-  //   console.log(response.data.data);
-  // });
-
   return (
     <div className="HomeFile  h-[100vh] flex flex-col justify-between items-center">
       <div className=" bg-slate-200/35 h-[60%]  w-[90%] mt-44 md:w-96  flex flex-col justify-around items-center text-center rounded-md font-Regular_Text text-white text-2xl">

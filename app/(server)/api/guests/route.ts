@@ -25,14 +25,20 @@ export async function GET(req: NextRequest, res: NextResponse) {
 export async function POST(req: NextRequest, res: NextResponse) {
   dbConnect();
   const data = await req.json();
- 
-  sendRegistrationSuccessEmail(data.email);
 
   try {
-    const guest = await Guest.create(data);
+    const existingGuest = await Guest.findOne({ email: data.email });
+    if (existingGuest) {
+      return NextResponse.json({
+        status: 400,
+        message: "Guest with this email already exists",
+      });
+    }
+    await Guest.create(data);
+    sendRegistrationSuccessEmail(data.email);
     return NextResponse.json({ status: 201, success: true });
   } catch (error: any) {
-    return NextResponse.json({ message: error.message, status: 400 });
+    return NextResponse.json({ message: error.message, status: 404 });
   }
 }
 
