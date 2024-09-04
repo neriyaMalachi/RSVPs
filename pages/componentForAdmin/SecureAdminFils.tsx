@@ -2,31 +2,37 @@
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+
+
 interface TokenResponce {
   token: string | null;
   error: AxiosError | null;
 }
-const SecureAdminFils = () => {
-  const route = useRouter();
-  const [isSuccessfull, setIsSuccessfull] = useState<Boolean>(false);
-  
-  async function getToken(): Promise<TokenResponce> {
-    try {
-      const { data } = await axios.get("/api/me");
 
-      return {
-        token: data,
-        error: null,
-      };
-    } catch (e) {
-      const error = e as AxiosError;
+async function getToken(): Promise<TokenResponce> {
+  try {
+    const { data } = await axios.get("/api/TokenForAdmin");
+console.log(data);
 
-      return {
-        token: null,
-        error,
-      };
-    }
+    return {
+      token: data,
+      error: null,
+    };
+  } catch (e) {
+    const error = e as AxiosError;
+
+    return {
+      token: null,
+      error,
+    };
   }
+}
+
+
+const SecureAdminFils = ({ children }: { children: React.ReactNode }) => {
+  const route = useRouter();
+  const [isSuccessfull, setIsSuccessfull] = useState<Boolean>(true);
+  
   useEffect(() => {
     (async () => {
       const { token, error } = await getToken();
@@ -38,7 +44,9 @@ const SecureAdminFils = () => {
       route.push("/Admin/AllGuests");
       return;
     })();
-  });
+  }, []);
+
+
   if (!isSuccessfull) {
     return (
       <div className="grid min-h-full w-full place-items-center  rounded-lg p-6">
@@ -69,6 +77,7 @@ const SecureAdminFils = () => {
       </div>
     );
   }
+  return <main>{children}</main>;
 };
 
 export default SecureAdminFils;

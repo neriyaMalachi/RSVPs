@@ -1,16 +1,27 @@
 "use client";
 import axios from "axios";
+import { error } from "console";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+  const [token, setToken] = useState();
   const [step, setStep] = useState(1); // 1: Enter Email, 2: Enter Code
   const [message, setMessage] = useState("");
-
+  const route = useRouter();
   const sendCode = async () => {
     try {
-      await axios.post("/api/ValidationEmail", {email});
+      await axios
+        .post("/api/ValidationEmail", { email })
+        .then((results) => {
+          console.log(results.data);
+          setToken(results.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       setStep(2);
       setMessage("Verification code sent to your email.");
     } catch (error) {
@@ -20,13 +31,21 @@ const Page = () => {
 
   const verifyCode = async () => {
     try {
-       await axios.post("/api/ValidationCode", {email});
-      // const { token } = response.data;
-      // localStorage.setItem("OurSiteJWT", token);
+      await axios
+        .post("/api/ValidationCode", { token, code })
+        .then((results) => {
+          const accessToken = results.data;
+          console.log(accessToken);
+          localStorage.setItem("accessToken", accessToken);
+          route.push("/Admin/AllGuests")
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       setMessage(
         "Logged in successfully! You have admin access for 30 minutes."
       );
-      // Redirect or perform any admin action
     } catch (error) {
       setMessage("Invalid code. Please try again.");
     }

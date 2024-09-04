@@ -18,42 +18,46 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
-  
-  const email = process.env.EMAIL || "e";
+
+  const email = process.env.EMAIL || "";
   if (data.email === process.env.EMAIL_ADMIN) {
     // יצירת קוד אימות
     const verificationCode = generateVerificationCode();
-  
-   // שליחת הקוד לאימייל של המשתמש
-   const mailOptions = {
-    from: process.env.EMAIL_COMPANY,
-    to: process.env.EMAIL_ADMIN,
-    subject: 'Verification Code',
-    text: `Your verification code is: ${verificationCode}`,
-  };
 
-  try {
-    await transporter.sendMail(mailOptions);
+    // שליחת הקוד לאימייל של המשתמש
+    const mailOptions = {
+      from: process.env.EMAIL_COMPANY,
+      to: process.env.EMAIL_ADMIN,
+      subject: "Verification Code",
+      text: `Your verification code is: ${verificationCode}`,
+    };
 
-    // החתמה של קוד האימות בטוקן
-    const token = sign({ verificationCode, email }, process.env.JWT_SECRET || '', { expiresIn: '30m' });
+    try {
+      await transporter.sendMail(mailOptions);
 
+      // החתמה של קוד האימות בטוקן
+      const token = sign(
+        { verificationCode, email },
+        process.env.JWT_SECRET || "",
+        { expiresIn: "30m" }
+      );
+
+      return NextResponse.json({
+        status: 200,
+        message: "Verification code sent",
+        data: token,
+      });
+    } catch (error) {
+      return NextResponse.json({
+        status: 500,
+        message: "Failed to send email",
+        error,
+      });
+    }
+  } else {
     return NextResponse.json({
-      status: 200,
-      message: 'Verification code sent',
-       token
-    });
-  } catch (error) {
-    return NextResponse.json({
-      status: 500,
-      message: 'Failed to send email',
-       error
+      status: 405,
+      message: "Method not allowed",
     });
   }
-} else {
-  return NextResponse.json({
-    status: 405,
-    message: 'Method not allowed',
-  });
-}
 }
