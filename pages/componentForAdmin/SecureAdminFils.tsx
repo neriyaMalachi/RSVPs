@@ -6,7 +6,7 @@ interface TokenResponce {
   token: string | null;
   error: AxiosError | null;
 }
-const ValidationForAdmin = () => {
+const SecureAdminFils = () => {
   const route = useRouter();
   const [isSuccessfull, setIsSuccessfull] = useState<Boolean>(false);
   
@@ -71,4 +71,4 @@ const ValidationForAdmin = () => {
   }
 };
 
-export default ValidationForAdmin;
+export default SecureAdminFils;

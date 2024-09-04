@@ -1,39 +1,59 @@
-// import { COOKIE_NAME } from "@/constants";
-// import { serialize } from "cookie";
 import { sign } from "jsonwebtoken";
+import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
-export async function GET(req: Request, res: Response) {
-    console.log("ddd");
-   
-    const data = await req.json();
-    console.log("ddd",data);
+// פונקציה ליצירת קוד בן 4 ספרות
+function generateVerificationCode() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+// הגדרת תצורת SMTP
+const transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: process.env.EMAIL_COMPANY,
+    pass: process.env.PASS_COMPANY,
+  },
+});
+
+export async function POST(req: NextRequest, res: NextResponse) {
+  const data = await req.json();
   
-  const secret = process.env.JWT_SECRET || "";
+  const email = process.env.EMAIL || "e";
+  if (data.email === process.env.EMAIL_ADMIN) {
+    // יצירת קוד אימות
+    const verificationCode = generateVerificationCode();
+  
+   // שליחת הקוד לאימייל של המשתמש
+   const mailOptions = {
+    from: process.env.EMAIL_COMPANY,
+    to: process.env.EMAIL_ADMIN,
+    subject: 'Verification Code',
+    text: `Your verification code is: ${verificationCode}`,
+  };
 
-//   if (
-//     data.email === "n@gmail.com"
-//   ) {
-    // const token = sign({ data }, secret, { expiresIn: 60 * 60 });
+  try {
+    await transporter.sendMail(mailOptions);
 
-    // const seralized = serialize(COOKIE_NAME, token, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === "production",
-    //   sameSite: "strict",
-    //   maxAge: 60 * 60,
-    //   path: "/",
-    // });
-    // const response = {
-    //   message: "Authenticated!",
-    // };
+    // החתמה של קוד האימות בטוקן
+    const token = sign({ verificationCode, email }, process.env.JWT_SECRET || '', { expiresIn: '30m' });
 
-    // return new Response(JSON.stringify(response), {
-    //   status: 200,
-    //   headers: { "Set-Cookie": seralized },
-    // });
-//   } else {
-//     return Response.json(
-//       { message: "error in server the email or password not valid !!!" },
-//       { status: 401 }
-//     );
-//   }
+    return NextResponse.json({
+      status: 200,
+      message: 'Verification code sent',
+       token
+    });
+  } catch (error) {
+    return NextResponse.json({
+      status: 500,
+      message: 'Failed to send email',
+       error
+    });
+  }
+} else {
+  return NextResponse.json({
+    status: 405,
+    message: 'Method not allowed',
+  });
+}
 }

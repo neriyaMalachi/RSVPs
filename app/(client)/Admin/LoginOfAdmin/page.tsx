@@ -10,7 +10,7 @@ const Page = () => {
 
   const sendCode = async () => {
     try {
-      await axios.get("/api/ValidationEmail", { data: { email } });
+      await axios.post("/api/ValidationEmail", {email});
       setStep(2);
       setMessage("Verification code sent to your email.");
     } catch (error) {
@@ -20,12 +20,9 @@ const Page = () => {
 
   const verifyCode = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/verify-code", {
-        email,
-        code,
-      });
-      const { token } = response.data;
-      localStorage.setItem("OurSiteJWT", token);
+       await axios.post("/api/ValidationCode", {email});
+      // const { token } = response.data;
+      // localStorage.setItem("OurSiteJWT", token);
       setMessage(
         "Logged in successfully! You have admin access for 30 minutes."
       );
