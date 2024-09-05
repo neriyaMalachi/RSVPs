@@ -1,7 +1,6 @@
 import axios from "axios";
 const apiUrl = process.env.API_URL;
 const nodemailer = require("nodemailer");
-
 // הגדרת תצורת SMTP
 const transporter = nodemailer.createTransport({
   service: "Gmail", // ניתן לשנות לכל שירות SMTP אחר (SendGrid, Mailgun וכדומה)

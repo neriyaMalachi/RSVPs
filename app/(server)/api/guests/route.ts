@@ -6,37 +6,55 @@ require("@/app/(server)/models/Guest");
 
 dbConnect();
 
+// פונקציה להוספת כותרות CORS
+function setCORSHeaders(res: NextResponse) {
+  res.headers.set("Access-Control-Allow-Origin", "*");
+  res.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+}
+
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     await dbConnect();
     const guests = await Guest.find();
-    return NextResponse.json({ success: true, guests });
+    
+    const response = NextResponse.json({ success: true, guests });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   } catch (error: any) {
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: false,
       status: 400,
       message: error.message,
     });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   }
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
- await dbConnect();
+  await dbConnect();
   const data = await req.json();
 
   try {
     const existingGuest = await Guest.findOne({ email: data.email });
     if (existingGuest) {
-      return NextResponse.json({
+      const response = NextResponse.json({
         status: 400,
         message: "Guest with this email already exists",
       });
+      setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+      return response;
     }
+
     await Guest.create(data);
-    // sendRegistrationSuccessEmail(data.email);
-    return NextResponse.json({ status: 201, success: true });
+    const response = NextResponse.json({ status: 201, success: true });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   } catch (error: any) {
-    return NextResponse.json({ message: error.message, status: 404 });
+    const response = NextResponse.json({ message: error.message, status: 404 });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   }
 }
 
@@ -56,58 +74,42 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         notes: data.notes,
       }
     );
-    return NextResponse.json({
+
+    const response = NextResponse.json({
       message: "successfull",
       status: 200,
       data: NewGusts,
     });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   } catch (error: any) {
-    return NextResponse.json({ message: error.message, status: 400 });
+    const response = NextResponse.json({ message: error.message, status: 400 });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   }
 }
 
 export async function DELETE(req: NextRequest, res: NextResponse) {
   const DeleteGusts = await req.json();
-  console.log("data: ", DeleteGusts);
   try {
     await dbConnect();
     const result = await Guest.findByIdAndDelete(DeleteGusts.id);
-    console.log(result);
 
-    if (result.deletedCount === 0) {
-      return NextResponse.json({ message: "Guest not found", status: 404 });
+    if (!result) {
+      const response = NextResponse.json({ message: "Guest not found", status: 404 });
+      setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+      return response;
     }
-    return NextResponse.json({
+
+    const response = NextResponse.json({
       message: "Deleted Successfull",
       status: 200,
     });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   } catch (error: any) {
-    return NextResponse.json({ message: error.message, status: 400 });
+    const response = NextResponse.json({ message: error.message, status: 400 });
+    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    return response;
   }
 }
-
-// function generateGuestData() {
-//   return {
-//     name: faker.person.fullName(),
-//     email: faker.internet.email(),
-//     phone: faker.phone.number(),
-//     guests: faker.number.int({ min: 1, max: 5 }),
-//     attending: faker.datatype.boolean(),
-//     side: faker.helpers.arrayElement(['bride', 'groom']),
-//     notes: faker.lorem.sentence(),
-//   };
-// }
-// otomation for add 1000 gusts
-// let usersAdded = 0;
-//   for (let i = 0; i < 1000; i++) {
-//     const guestData = generateGuestData();
-//     const guest = new Guest(guestData);
-
-//     try {
-//       await guest.save();
-//       usersAdded++;
-//     } catch (err:any) {
-//       console.error(`Error adding user ${i + 1}:`, err.message);
-//     }
-//   }
-//       return NextResponse.json({ status: 201, success: true });
