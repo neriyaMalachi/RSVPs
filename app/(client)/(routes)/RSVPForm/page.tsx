@@ -53,16 +53,16 @@ const Page = () => {
             toast.error("פרטיך כבר קיימים במערכת");
           } else {
             setIsLoading(false);
-            toast.error("! בעיה בפרטים או שנרשמת כבר");
+            toast.error("!1 בעיה בפרטים או שנרשמת כבר");
           }
         })
         .catch((error: any) => {
           setIsLoading(false);
-          toast.error("! בעיה בפרטים או שנרשמת כבר");
+          toast.error("! 2בעיה בפרטים או שנרשמת כבר");
         });
     } catch (error) {
         setIsLoading(false);
-        toast.error("! בעיה בפרטים או שנרשמת כבר");
+        toast.error("! 3בעיה בפרטים או שנרשמת כבר");
     }
   };
   const editSideFrends = (e: any) => {
