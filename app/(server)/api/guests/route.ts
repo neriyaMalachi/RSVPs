@@ -33,7 +33,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       });
     }
     await Guest.create(data);
-    sendRegistrationSuccessEmail(data.email);
+    // sendRegistrationSuccessEmail(data.email);
     return NextResponse.json({ status: 201, success: true });
   } catch (error: any) {
     return NextResponse.json({ message: error.message, status: 404 });
