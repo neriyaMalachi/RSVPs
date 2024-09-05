@@ -30,7 +30,7 @@ const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
   const value = await props;
   console.log("valll", value);
   axios
-    .get("http://127.0.0.1:3000/api/DitelsOfThePage")
+    .get("http://api/DitelsOfThePage")
     .then((res) => {
       let detels = res.data.data;
       console.log(detels);
