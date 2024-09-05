@@ -10,14 +10,17 @@ dbConnect();
 function setCORSHeaders(res: NextResponse) {
   res.headers.set("Access-Control-Allow-Origin", "*");
   res.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
 }
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     await dbConnect();
     const guests = await Guest.find();
-    
+
     const response = NextResponse.json({ success: true, guests });
     setCORSHeaders(response); // הוספת כותרות CORS לתגובה
     return response;
@@ -35,7 +38,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 export async function POST(req: NextRequest, res: NextResponse) {
   await dbConnect();
   const data = await req.json();
-
+  sendRegistrationSuccessEmail(data.email);
   try {
     const existingGuest = await Guest.findOne({ email: data.email });
     if (existingGuest) {
@@ -96,7 +99,10 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
     const result = await Guest.findByIdAndDelete(DeleteGusts.id);
 
     if (!result) {
-      const response = NextResponse.json({ message: "Guest not found", status: 404 });
+      const response = NextResponse.json({
+        message: "Guest not found",
+        status: 404,
+      });
       setCORSHeaders(response); // הוספת כותרות CORS לתגובה
       return response;
     }
