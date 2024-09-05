@@ -16,14 +16,17 @@ const Page = () => {
       await axios
         .post("/api/ValidationEmail", { email })
         .then((results) => {
-          console.log(results.data);
+          if (results.data.status === 405) {
+            setMessage("האיימיל לא נכון נסה שנית");
+          } else {
+            setStep(2);
+            setMessage("נשלח אליך קוד לאימייל");
+          }
           setToken(results.data);
         })
         .catch((error) => {
           console.log(error);
         });
-      setStep(2);
-      setMessage("נשלח אליך קוד לאימייל");
     } catch (error) {
       setMessage("שגיאה באיימיל");
     }
@@ -34,33 +37,35 @@ const Page = () => {
       await axios
         .post("/api/ValidationCode", { token, code })
         .then((results) => {
-          const accessToken = results.data;
-          console.log(accessToken);
-          localStorage.setItem("accessToken", accessToken);
-          route.push("/Admin/AllGuests");
+          console.log(results.data.status);
+          if (results.data.status === 401) {
+            setMessage("קוד לא תקין , נסה שנית");
+          } else {
+            const accessToken = results.data;
+            console.log(accessToken);
+            localStorage.setItem("accessToken", accessToken);
+            route.push("/Admin/AllGuests");
+            setMessage("התחברת בהצלחה למשך שעה אחת");
+          }
         })
         .catch((error) => {
           console.log(error);
         });
-
-      setMessage(
-        "התחברת בהצלחה למשך שעה אחת"
-      );
     } catch (error) {
-      setMessage("קוד לא תקין , נסה שנית");
+      setMessage("קוד לא תקין או עבר זמן ההתחברות");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+      <div className="bg-white p-8 rounded text-right shadow-md w-96">
         {step === 1 ? (
           <>
-            <h2 className="text-2xl font-bold mb-6">Login</h2>
+            <h2 className="text-2xl font-bold mb-6">הכנס איימיל</h2>
             <input
               type="email"
-              className="border p-2 mb-4 w-full"
-              placeholder="Enter your email"
+              className="border p-2 mb-4 w-full text-right"
+              placeholder="abcde@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -68,12 +73,12 @@ const Page = () => {
               onClick={sendCode}
               className="bg-blue-500 text-white p-2 rounded w-full"
             >
-              Send Code
+              התחבר
             </button>
           </>
         ) : (
           <>
-            <h2 className="text-2xl font-bold mb-6">Enter Verification Code</h2>
+            <h2 className="text-2xl font-bold mb-6">קוד אימות</h2>
             <input
               type="text"
               className="border p-2 mb-4 w-full"
@@ -85,7 +90,7 @@ const Page = () => {
               onClick={verifyCode}
               className="bg-blue-500 text-white p-2 rounded w-full"
             >
-              Verify Code
+              אמת קוד
             </button>
           </>
         )}

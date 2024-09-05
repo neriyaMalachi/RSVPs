@@ -1,4 +1,4 @@
-import { dbConnect } from "@/lib/mongodb";
+import { dbConnect } from "@/app/(server)/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import DetelsOfThePageSchema from "@/app/(server)/models/DitelsOfThePage";
 

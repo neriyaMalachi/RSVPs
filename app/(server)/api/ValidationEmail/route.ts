@@ -19,8 +19,10 @@ const transporter = nodemailer.createTransport({
 export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
 
-  const email = process.env.EMAIL || "";
-  if (data.email === process.env.EMAIL_ADMIN) {
+  const email = process.env.EMAIL_ADMIN || "";
+  
+  if (data.email === email) {
+    
     // יצירת קוד אימות
     const verificationCode = generateVerificationCode();
 
@@ -39,7 +41,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       const token = sign(
         { verificationCode, email },
         process.env.JWT_SECRET || "",
-        { expiresIn: "30m" }
+        { expiresIn: "1m" }
       );
 
       return NextResponse.json({

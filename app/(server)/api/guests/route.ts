@@ -1,4 +1,4 @@
-import { dbConnect } from "@/lib/mongodb";
+import { dbConnect } from "@/app/(server)/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
 import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
