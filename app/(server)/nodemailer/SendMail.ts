@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = process.env.API_URL || "http://127.0.0.1:3000";
+const apiUrl = process.env.API_URL;
 const nodemailer = require("nodemailer");
 
 // הגדרת תצורת SMTP
