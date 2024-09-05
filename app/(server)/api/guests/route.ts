@@ -8,6 +8,7 @@ dbConnect();
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
+    await dbConnect();
     const guests = await Guest.find();
     return NextResponse.json({ success: true, guests });
   } catch (error: any) {
@@ -20,7 +21,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  dbConnect();
+ await dbConnect();
   const data = await req.json();
 
   try {
