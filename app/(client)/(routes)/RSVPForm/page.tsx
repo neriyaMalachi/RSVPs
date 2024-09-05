@@ -34,6 +34,8 @@ const Page = () => {
       await axios
         .post("/api/Guests", formData)
         .then((results) => {
+          console.log(results.data);
+          
           if (results.data.status === 201) {
             setFormData({
               name: "",
