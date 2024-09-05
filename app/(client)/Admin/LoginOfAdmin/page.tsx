@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import { error } from "console";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -8,9 +7,10 @@ const Page = () => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [token, setToken] = useState();
-  const [step, setStep] = useState(1); // 1: Enter Email, 2: Enter Code
+  const [step, setStep] = useState(1);
   const [message, setMessage] = useState("");
   const route = useRouter();
+
   const sendCode = async () => {
     try {
       await axios
@@ -23,9 +23,9 @@ const Page = () => {
           console.log(error);
         });
       setStep(2);
-      setMessage("Verification code sent to your email.");
+      setMessage("נשלח אליך קוד לאימייל");
     } catch (error) {
-      setMessage("Error sending code.");
+      setMessage("שגיאה באיימיל");
     }
   };
 
@@ -37,19 +37,20 @@ const Page = () => {
           const accessToken = results.data;
           console.log(accessToken);
           localStorage.setItem("accessToken", accessToken);
-          route.push("/Admin/AllGuests")
+          route.push("/Admin/AllGuests");
         })
         .catch((error) => {
           console.log(error);
         });
 
       setMessage(
-        "Logged in successfully! You have admin access for 30 minutes."
+        "התחברת בהצלחה למשך שעה אחת"
       );
     } catch (error) {
-      setMessage("Invalid code. Please try again.");
+      setMessage("קוד לא תקין , נסה שנית");
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-96">
@@ -88,7 +89,7 @@ const Page = () => {
             </button>
           </>
         )}
-        {message && <p className="text-red-500 mt-4">{message}</p>}
+        {message && <p className="text-red-500 mt-4 text-right">{message}</p>}
       </div>
     </div>
   );

@@ -34,6 +34,7 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ message: error.message, status: 400 });
   }
 }
+
 export async function GET(req: NextRequest, res: NextResponse) {
   const id = "66b91c2fbc80906306b21597";
   console.log("in route get");
@@ -58,6 +59,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
 export async function POST(req: NextRequest) {
   try {
     // Parse request body

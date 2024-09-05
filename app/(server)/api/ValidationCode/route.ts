@@ -1,9 +1,11 @@
+import { serialize } from "cookie";
 import { verify } from "jsonwebtoken";
 import { sign } from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const { token, code } = await req.json();
+
   console.log("Received code:", token, code);
 
   try {
@@ -15,17 +17,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (decoded.verificationCode === code) {
       // יצירת טוקן גישה למשתמש
+      console.log("success");
       const accessToken = sign(
         { email: decoded.email },
         process.env.JWT_SECRET || "",
-        { expiresIn: "30m" }
+        {
+          expiresIn: "5m",
+        }
       );
-
-      return NextResponse.json({
-        status: 200,
-        message: "Verification successful",
-        accessToken,
+      const serialized = serialize("accessToken", accessToken, {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 60,
+        path: "/",
       });
+      const response = NextResponse.json({
+        message: "Verification successful",
+      });
+
+      // הגדרת ה-Set-Cookie בעזרת headers
+      response.headers.set("Set-Cookie", serialized);
+
+      return response;
     } else {
       return NextResponse.json({
         status: 401,

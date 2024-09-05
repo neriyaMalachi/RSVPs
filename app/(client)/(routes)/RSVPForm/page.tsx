@@ -32,7 +32,7 @@ const Page = () => {
     e.preventDefault();
     try {
       await axios
-        .post("/api/guests", formData)
+        .post("/api/Guests", formData)
         .then((results) => {
           if (results.data.status === 201) {
             setFormData({

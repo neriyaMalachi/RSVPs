@@ -23,7 +23,7 @@ const Futer = () => {
   };
   const getAllGuests = async () => {
     await axios
-      .get("/api/guests")
+      .get("/api/Guests")
       .then(function (results) {
         setAllGuests(results.data.guests);
       })

@@ -1,10 +1,7 @@
-// pages/api/add.js
 import { dbConnect } from "@/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
-import { faker } from "@faker-js/faker";
 import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
-import axios from "axios";
 require("@/app/(server)/models/Guest");
 
 dbConnect();
@@ -67,6 +64,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ message: error.message, status: 400 });
   }
 }
+
 export async function DELETE(req: NextRequest, res: NextResponse) {
   const DeleteGusts = await req.json();
   console.log("data: ", DeleteGusts);

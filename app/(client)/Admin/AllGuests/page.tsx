@@ -7,6 +7,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import React, { useEffect, useState } from "react";
 import Futer from "@/pages/components/Futer";
 import toast, { Toaster } from "react-hot-toast";
+import SecureAdminFils from "@/pages/componentForAdmin/SecureAdminFils";
 
 const Page = () => {
   const [guests, setGuests] = useState([]);
@@ -50,6 +51,7 @@ const Page = () => {
   };
   
   return (
+    <SecureAdminFils>
     <div className="w-full p-4 bg-gray-100 ">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex flex-col mt-5 md:flex-row justify-between items-start md:items-center m-2">
@@ -126,6 +128,7 @@ const Page = () => {
         <Futer />
       </div>
     </div>
+    </SecureAdminFils>
   );
 };
 
