@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const apiUrl = process.env.API_URL || "http://127.0.0.1:3000";
 const nodemailer = require("nodemailer");
 
 // הגדרת תצורת SMTP
@@ -30,7 +30,7 @@ const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
   const value = await props;
   console.log("valll", value);
   axios
-    .get("http://api/DitelsOfThePage")
+    .get(`${apiUrl}/api/DitelsOfThePage`)
     .then((res) => {
       let detels = res.data.data;
       console.log(detels);
