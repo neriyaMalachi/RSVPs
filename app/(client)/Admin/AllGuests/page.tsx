@@ -18,15 +18,17 @@ const Page = () => {
   let indexGuests = 1;
 
   useEffect(() => {
-    console.log("rrrrr",`${process.env.API_URL}`);
     
     axios
-      .get(`/api/Guests`)
-      .then(function (results) {
-        setGuests(results.data.guests);
-        setLouding(false);
-      })
-      .catch(function (error) {
+    .get(`/api/Guests`)
+    .then(function (results) {
+      console.log("successss");
+      
+      setGuests(results.data.guests);
+      setLouding(false);
+    })
+    .catch(function (error) {
+        console.log("rrrrr");
         console.log(error);
       });
   }, [refresh]);
