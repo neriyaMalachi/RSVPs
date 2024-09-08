@@ -37,15 +37,15 @@ const Page = () => {
           console.log(results.data);
 
           if (results.data.status === 201) {
-            setFormData({
-              name: "",
-              email: "",
-              phone: "",
-              guests: 0,
-              attending: false,
-              side: "",
-              notes: "",
-            });
+            // setFormData({
+            //   name: "",
+            //   email: "",
+            //   phone: "",
+            //   guests: 0,
+            //   attending: false,
+            //   side: "",
+            //   notes: "",
+            // });
             setIsLoading(false);
             router.push("/TanksFile");
           } else if (results.data.status === 400) {

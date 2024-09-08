@@ -38,7 +38,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 export async function POST(req: NextRequest, res: NextResponse) {
   await dbConnect();
   const data = await req.json();
-  sendRegistrationSuccessEmail(data.email);
+  // sendRegistrationSuccessEmail(data.email);
   try {
     const existingGuest = await Guest.findOne({ email: data.email });
     if (existingGuest) {
