@@ -26,8 +26,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
   console.log(data);
 
-   sendRegistrationSuccessEmail(data.email);
-   try {
+  try {
+     sendRegistrationSuccessEmail(data.email);
     await dbConnect();
     const existingGuest = await Guest.findOne({ email: data.email });
     if (existingGuest) {
