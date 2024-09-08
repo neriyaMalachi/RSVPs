@@ -35,7 +35,7 @@ const Page = () => {
         .post(`${process.env.API_URL}/api/Guests`, formData)
         .then((results) => {
           console.log(results.data);
-          
+
           if (results.data.status === 201) {
             setFormData({
               name: "",
@@ -61,8 +61,8 @@ const Page = () => {
           toast.error("! 2בעיה בפרטים או שנרשמת כבר");
         });
     } catch (error) {
-        setIsLoading(false);
-        toast.error("! 3בעיה בפרטים או שנרשמת כבר");
+      setIsLoading(false);
+      toast.error("! 3בעיה בפרטים או שנרשמת כבר");
     }
   };
   const editSideFrends = (e: any) => {

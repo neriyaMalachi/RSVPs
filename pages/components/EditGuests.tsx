@@ -39,7 +39,7 @@ const EditGuests = (guest: any) => {
     console.log(formData);
 
     await axios
-      .put("/api/Guests", formData)
+      .put(`${process.env.API_URL}/api/Guests`, formData)
       .then(function (res) {
         ChengeStatusFile(!refresh);
         setIsLoading(false);

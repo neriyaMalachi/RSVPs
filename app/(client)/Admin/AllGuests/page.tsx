@@ -19,7 +19,7 @@ const Page = () => {
 
   useEffect(() => {
     axios
-      .get("/api/Guests")
+      .get(`${process.env.API_URL}/api/Guests`)
       .then(function (results) {
         setGuests(results.data.guests);
         setLouding(false);
@@ -37,7 +37,7 @@ const Page = () => {
   }
 
     await axios
-      .delete("/api/Guests", { data: { id } })
+      .delete(`${process.env.API_URL}/api/Guests`, { data: { id } })
       .then((results) => {
         console.log(results.data.message);
 
