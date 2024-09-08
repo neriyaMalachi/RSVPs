@@ -18,9 +18,10 @@ const Page = () => {
   let indexGuests = 1;
 
   useEffect(() => {
+    console.log("ppp",`${process.env.API_URL}`);
     
     axios
-    .get('https://rsv-ps.vercel.app/api/Guests')
+    .get(`${process.env.API_URL}/api/Guests`)
     .then(function (results) {
       console.log("successss");
       
