@@ -25,13 +25,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
     // setCORSHeaders(response); // הוספת כותרות CORS לתגובה
     // return response;
   } catch (error: any) {
-    const response = NextResponse.json({
+    return NextResponse.json({
       success: false,
       status: 400,
       message: error.message,
     });
-    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
-    return response;
+    // setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    // return response;
   }
 }
 
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   await dbConnect();
   const data = await req.json();
   console.log(data);
-  
+
   // sendRegistrationSuccessEmail(data.email);
   try {
     const existingGuest = await Guest.findOne({ email: data.email });

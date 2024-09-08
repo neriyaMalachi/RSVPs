@@ -20,7 +20,7 @@ const Page = () => {
   useEffect(() => {
     
     axios
-    .get(`/api/Guests`)
+    .get('https://rsv-ps.vercel.app/api/Guests')
     .then(function (results) {
       console.log("successss");
       
