@@ -20,17 +20,17 @@ const Page = () => {
   useEffect(() => {
     console.log("ppp", `${process.env.API_URL}`);
 
-    axios.get("/api/Guests")
+    axios.get(`/api/Guests`)
       .then(function (results) {
         console.log("successss");
 
         setGuests(results.data.guests);
         setLouding(false);
       })
-      // .catch(function (error) {
-      //   console.log("rrrrr");
-      //   console.log(error);
-      // });
+      .catch(function (error) {
+        console.log("rrrrr");
+        console.log(error);
+      });
   }, [refresh]);
 
   const deleteGustse = async (id: AxiosRequestConfig) => {
