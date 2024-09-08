@@ -1,8 +1,8 @@
 import { dbConnect } from "@/app/(server)/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
-import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
-require("@/app/(server)/models/Guest");
+// import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
+// require("@/app/(server)/models/Guest");
 
 
 export async function GET(req: NextRequest, res: NextResponse) {
