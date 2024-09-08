@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
 require("@/app/(server)/models/Guest");
 
-dbConnect();
 
 // פונקציה להוספת כותרות CORS
 function setCORSHeaders(res: NextResponse) {
@@ -36,12 +35,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  await dbConnect();
   const data = await req.json();
   console.log(data);
-
+  
   // sendRegistrationSuccessEmail(data.email);
   try {
+    await dbConnect();
     const existingGuest = await Guest.findOne({ email: data.email });
     if (existingGuest) {
       const response = NextResponse.json({
