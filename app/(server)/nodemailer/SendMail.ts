@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
   service: "Gmail", // ניתן לשנות לכל שירות SMTP אחר (SendGrid, Mailgun וכדומה)
   auth: {
     user:" nmambition2022@gmail.com", // המייל שלך
-    pass: "neriamalachi@gmail.com", // הסיסמה שלך
+    pass: 'pqbv rbiv dqie rtss', // הסיסמה שלך
   },
 });
 interface PageDetails {
