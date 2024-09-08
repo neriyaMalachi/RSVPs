@@ -21,7 +21,7 @@ const Page = () => {
     console.log("rrrrr",`${process.env.API_URL}`);
     
     axios
-      .get(`https://rsv-ps.vercel.app/Admin/AllGuests/api/Guests`)
+      .get(`https://rsv-ps.vercel.app/api/Guests`)
       .then(function (results) {
         setGuests(results.data.guests);
         setLouding(false);
