@@ -21,7 +21,7 @@ const Page = () => {
     console.log("ppp",`${process.env.API_URL}`);
     
     axios
-    .get(`https://rsv-ps.vercel.app/api/Guests`)
+    .get("https://rsv-ps.vercel.app/api/Guests")
     .then(function (results) {
       console.log("successss");
       
