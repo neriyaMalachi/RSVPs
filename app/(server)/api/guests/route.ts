@@ -41,14 +41,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
   sendRegistrationSuccessEmail(data.email);
   try {
     const existingGuest = await Guest.findOne({ email: data.email });
-    if (existingGuest) {
-      const response = NextResponse.json({
-        status: 400,
-        message: "Guest with this email already exists",
-      });
-      setCORSHeaders(response); // הוספת כותרות CORS לתגובה
-      return response;
-    }
+    // if (existingGuest) {
+    //   const response = NextResponse.json({
+    //     status: 400,
+    //     message: "Guest with this email already exists",
+    //   });
+    //   setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    //   return response;
+    // }
 
     await Guest.create(data);
     const response = NextResponse.json({ status: 201, success: true });
