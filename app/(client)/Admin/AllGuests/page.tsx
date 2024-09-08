@@ -41,7 +41,7 @@ const Page = () => {
     }
 
     await axios
-      .delete(`/api/Guests`, { data: { id } })
+      .delete(`/api/guests`, { data: { id } })
       .then((results) => {
         console.log(results.data.message);
 

@@ -32,7 +32,7 @@ const Page = () => {
     e.preventDefault();
     try {
       await axios
-        .post(`/api/Guests`, formData)
+        .post(`/api/guests`, formData)
         .then((results) => {
           console.log(results.data.status);
 
