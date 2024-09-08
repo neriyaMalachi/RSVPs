@@ -18,8 +18,10 @@ const Page = () => {
   let indexGuests = 1;
 
   useEffect(() => {
+    console.log("rrrrr",`${process.env.API_URL}`);
+    
     axios
-      .get(`/api/Guests`)
+      .get(`${process.env.API_URL}/api/Guests`)
       .then(function (results) {
         setGuests(results.data.guests);
         setLouding(false);
