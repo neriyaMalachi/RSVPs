@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
 require("@/app/(server)/models/Guest");
 
-// פונקציה להוספת כותרות CORS
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
