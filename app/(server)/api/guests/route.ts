@@ -36,7 +36,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  // await dbConnect();
+  await dbConnect();
   const data = await req.json();
   console.log(data);
   
