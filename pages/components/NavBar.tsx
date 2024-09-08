@@ -27,7 +27,20 @@ const NavBar = () => {
               >
                 פרטי חתונה
               </a>
+              <a
+                href="/"
+                className="h-10 w-full hover:bg-gray-200 hover:font-Bold_Text rounded-md transition-all duration-200"
+              >
+                דף הבית
+              </a>
+              <a
+                href="/About"
+                className="h-10 w-full hover:bg-gray-200 hover:font-Bold_Text rounded-md transition-all duration-200"
+              >
+                אודות
+              </a>
             </div>
+            
           </div>
         ) : (
           <div className="absolute top-12 left-0 right-0 bg-white shadow-lg rounded-lg flex flex-col text-center p-4 font-Regular_Text space-y-2 z-10">
