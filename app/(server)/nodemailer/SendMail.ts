@@ -1,6 +1,7 @@
 import axios from "axios";
 const apiUrl = process.env.API_URL;
 const nodemailer = require("nodemailer");
+
 // הגדרת תצורת SMTP
 const transporter = nodemailer.createTransport({
   service: "Gmail", // ניתן לשנות לכל שירות SMTP אחר (SendGrid, Mailgun וכדומה)
@@ -29,7 +30,7 @@ const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
 //   const value = await props;
 //   console.log("valll", value);
   axios
-    .get("/api/DitelsOfThePage")
+    .get(`${apiUrl}/api/DitelsOfThePage`)
     .then((res) => {
       let detels = res.data.data;
       console.log(detels);
