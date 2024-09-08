@@ -23,11 +23,9 @@ interface PageDetails {
   img?: string;
 }
 
-const props = () => {};
 // פונקציה לשליחת מייל אישור הרשמה
 const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
-  const value = await props;
-  console.log("valll", value); 
+  
   axios
     .get(`https://rsv-ps.vercel.app/api/DitelsOfThePage`)
     .then((res) => {
