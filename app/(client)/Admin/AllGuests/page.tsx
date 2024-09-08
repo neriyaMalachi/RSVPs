@@ -9,16 +9,8 @@ import Futer from "@/pages/components/Futer";
 import toast, { Toaster } from "react-hot-toast";
 import SecureAdminFils from "@/pages/componentForAdmin/SecureAdminFils";
 
-interface IGuest {
-  name: string;
-  email: string;
-  phone: string;
-  guests: number;
-  attending: boolean;
-  notes: string;
-}
 const Page = () => {
-  const [guests, setGuests] = useState<IGuest | null>(null);
+  const [guests, setGuests] = useState([]);
   const [GuestEdit, setGuestEdit] = useState<any>();
   const [louding, setLouding] = useState(true);
   const { refresh, ChengeStatusFile }: any = useStore();
@@ -26,11 +18,11 @@ const Page = () => {
   let indexGuests = 1;
 
   useEffect(() => {
-    axios
-      .get(`/api/Guests`)
+    axios.get(`/api/guests`)
       .then(function (results) {
-        const data = results.data.guests as IGuest;
-        setGuests(data);
+        console.log("successss");
+
+        setGuests(results.data.guests);
         setLouding(false);
       })
       .catch(function (error) {
@@ -38,7 +30,6 @@ const Page = () => {
         console.log(error);
       });
   }, [refresh]);
-  console.log(guests);
 
   const deleteGustse = async (id: AxiosRequestConfig) => {
     const isConfirmed = window.confirm(
@@ -88,7 +79,7 @@ const Page = () => {
               </div>
             </div>
             <div className="AllGuests w-full overflow-auto border-t-4 border-b-4 border-red-500 h-[70vh] bg-white shadow-lg mt-2 rounded-lg p-4">
-              {/* {louding ? (
+              {louding ? (
                 <Louding />
               ) : (
                 <>
@@ -128,7 +119,7 @@ const Page = () => {
                       </div>
                     ))}
                 </>
-              )} */}
+              )}
             </div>
           </div>
 
