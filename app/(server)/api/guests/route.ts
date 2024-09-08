@@ -1,7 +1,7 @@
 import { dbConnect } from "@/app/(server)/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
-// import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
+import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
 // require("@/app/(server)/models/Guest");
 
 
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
   console.log(data);
 
-  // sendRegistrationSuccessEmail(data.email);
+  sendRegistrationSuccessEmail(data.email);
   try {
     await dbConnect();
     const existingGuest = await Guest.findOne({ email: data.email });
