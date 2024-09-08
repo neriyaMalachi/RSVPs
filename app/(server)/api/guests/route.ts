@@ -21,9 +21,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
     await dbConnect();
     const guests = await Guest.find();
 
-    const response = NextResponse.json({ success: true, guests });
-    setCORSHeaders(response); // הוספת כותרות CORS לתגובה
-    return response;
+    return NextResponse.json({ success: true, guests });
+    // setCORSHeaders(response); // הוספת כותרות CORS לתגובה
+    // return response;
   } catch (error: any) {
     const response = NextResponse.json({
       success: false,
