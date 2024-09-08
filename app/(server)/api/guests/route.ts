@@ -6,6 +6,8 @@ import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
 
 
 export async function GET(req: NextRequest, res: NextResponse) {
+  console.log( process.env.JWT_SECRET );
+  
   try {
     await dbConnect();
     const guests = await Guest.find();
