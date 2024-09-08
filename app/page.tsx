@@ -27,7 +27,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    axios.get(`${process.env.API_URL}/api/DitelsOfThePage`).then(function (results) {
+    axios.get(`/api/DitelsOfThePage`).then(function (results) {
       const data = results.data.data as PageDetails;
       setDetels(data);
       setLouding(false);
