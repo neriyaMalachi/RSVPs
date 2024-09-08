@@ -35,7 +35,7 @@ const Page = () => {
     e.preventDefault();
 
     await axios
-      .put(`${process.env.API_URL}/api/DitelsOfThePage`, formData)
+      .put(`/api/DitelsOfThePage`, formData)
       .then(function (response) {
         console.log(response);
         setIsLoading(false)

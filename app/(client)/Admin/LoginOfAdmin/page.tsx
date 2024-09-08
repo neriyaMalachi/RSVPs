@@ -14,7 +14,7 @@ const Page = () => {
   const sendCode = async () => {
     try {
       await axios
-        .post(`${process.env.API_URL}/api/ValidationEmail`, { email })
+        .post(`/api/ValidationEmail`, { email })
         .then((results) => {
           if (results.data.status === 405) {
             setMessage("האיימיל לא נכון נסה שנית");
@@ -35,7 +35,7 @@ const Page = () => {
   const verifyCode = async () => {
     try {
       await axios
-        .post(`${process.env.API_URL}/api/ValidationCode`, { token, code })
+        .post(`/api/ValidationCode`, { token, code })
         .then((results) => {
           console.log(results.data.status);
           if (results.data.status === 401) {
