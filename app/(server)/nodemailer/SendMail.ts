@@ -23,13 +23,13 @@ interface PageDetails {
   img?: string;
 }
 
-// const props = () => {};
+const props = () => {};
 // פונקציה לשליחת מייל אישור הרשמה
 const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
-//   const value = await props;
-//   console.log("valll", value);
+  const value = await props;
+  console.log("valll", value); 
   axios
-    .get(`/api/DitelsOfThePage`)
+    .get(`https://rsv-ps.vercel.app/api/DitelsOfThePage`)
     .then((res) => {
       let detels = res.data.data;
       console.log(detels);
