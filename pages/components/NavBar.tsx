@@ -1,9 +1,21 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const SaveGuests = async () => {
+    try {
+      await axios.post("/api/SaveGuests");
+
+      alert("Users saved successfully!");
+    } catch (error) {
+      console.error("Error saving users:", error);
+      alert("Failed to save users.");
+    }
+  };
 
   return (
     <div className="absolute w-full">
@@ -13,8 +25,8 @@ const NavBar = () => {
       {isOpen &&
         (window.location.pathname === "/Admin/AllGuests" ||
         window.location.pathname === "/Admin/ControlerToGuests" ? (
-          <div className="relative">
-            <div className="absolute top-12 left-0 right-0 bg-white shadow-lg rounded-lg flex flex-col text-center p-4 font-Regular_Text space-y-2 z-10">
+          <div className="">
+            <div className="absolute  left-0 right-0 bg-white shadow-lg rounded-lg flex flex-col text-center p-4 font-Regular_Text space-y-2 z-10">
               <a
                 href="/Admin/AllGuests"
                 className="h-10 w-full hover:bg-gray-200 hover:font-Bold_Text rounded-md transition-all duration-200"
@@ -33,6 +45,12 @@ const NavBar = () => {
               >
                 דף הבית
               </a>
+              <button
+                onClick={SaveGuests}
+                className="h-10 w-full hover:bg-gray-200 hover:font-Bold_Text rounded-md transition-all duration-200"
+              >
+                שמירת אורחים בקובץ במחשב
+              </button>
               <a
                 href="/About"
                 className="h-10 w-full hover:bg-gray-200 hover:font-Bold_Text rounded-md transition-all duration-200"
@@ -40,7 +58,6 @@ const NavBar = () => {
                 אודות
               </a>
             </div>
-            
           </div>
         ) : (
           <div className="absolute top-12 left-0 right-0 bg-white shadow-lg rounded-lg flex flex-col text-center p-4 font-Regular_Text space-y-2 z-10">
