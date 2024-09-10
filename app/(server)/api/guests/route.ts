@@ -6,13 +6,13 @@ import jwt from "jsonwebtoken";
 require("@/app/(server)/models/Guest");
 
 export async function GET(req: NextRequest, res: NextResponse) {
-  if (!req.cookies.get("accessToken")?.value) {
-    return NextResponse.json({
-      success: false,
-      status: 400,
-      message: "Not Found",
-    });
-  }
+  // if (!req.cookies.get("accessToken")?.value) {
+  //   return NextResponse.json({
+  //     success: false,
+  //     status: 400,
+  //     message: "Not Found",
+  //   });
+  // }
   try {
     await dbConnect();
     const guests = await Guest.find();
