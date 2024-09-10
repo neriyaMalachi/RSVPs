@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const NavBar = () => {
@@ -9,16 +10,19 @@ const NavBar = () => {
   const SaveGuests = async () => {
     try {
       await axios.post("/api/SaveGuests");
+      toast.success("רשימת האורחים ירדה");
 
-      alert("Users saved successfully!");
     } catch (error) {
       console.error("Error saving users:", error);
-      alert("Failed to save users.");
+      toast.error("רשימת האורחים אינה ירדה");
+
     }
   };
 
   return (
     <div className="absolute w-full">
+        <Toaster position="top-center" reverseOrder={false} />
+
       <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-black">
         <GiHamburgerMenu size={24} />
       </button>

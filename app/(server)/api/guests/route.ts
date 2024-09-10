@@ -2,12 +2,17 @@ import { dbConnect } from "@/app/(server)/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
 import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
+import jwt from "jsonwebtoken";
 require("@/app/(server)/models/Guest");
 
-
 export async function GET(req: NextRequest, res: NextResponse) {
-  console.log( process.env.JWT_SECRET );
-  
+  if (!req.cookies.get("accessToken")?.value) {
+    return NextResponse.json({
+      success: false,
+      status: 400,
+      message: "Not Found",
+    });
+  }
   try {
     await dbConnect();
     const guests = await Guest.find();
@@ -27,7 +32,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   console.log(data);
 
   try {
-     sendRegistrationSuccessEmail(data.email);
+    sendRegistrationSuccessEmail(data.email);
     await dbConnect();
     const existingGuest = await Guest.findOne({ email: data.email });
     if (existingGuest) {
@@ -66,10 +71,8 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       status: 200,
       data: NewGusts,
     });
-   
   } catch (error: any) {
     return NextResponse.json({ message: error.message, status: 400 });
-    
   }
 }
 
@@ -84,16 +87,13 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
         message: "Guest not found",
         status: 404,
       });
-     
     }
 
     return NextResponse.json({
       message: "Deleted Successfull",
       status: 200,
     });
-   
   } catch (error: any) {
     return NextResponse.json({ message: error.message, status: 400 });
-   
   }
 }

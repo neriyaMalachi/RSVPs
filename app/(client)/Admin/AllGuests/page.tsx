@@ -20,13 +20,10 @@ const Page = () => {
   useEffect(() => {
     axios.get(`/api/guests`)
       .then(function (results) {
-        console.log("successss");
-
         setGuests(results.data.guests);
         setLouding(false);
       })
       .catch(function (error) {
-        console.log("rrrrr");
         console.log(error);
       });
   }, [refresh]);
