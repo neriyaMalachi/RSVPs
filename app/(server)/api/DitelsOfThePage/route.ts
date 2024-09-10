@@ -38,13 +38,13 @@ export async function PUT(req: NextRequest) {
 export async function GET(req: NextRequest, res: NextResponse) {
   const id = "66b91c2fbc80906306b21597";
   console.log("in route get");
-  if (!req.cookies.get("accessToken")?.value) {
-    return NextResponse.json({
-      success: false,
-      status: 400,
-      message: "Not Found",
-    });
-  }
+  // if (!req.cookies.get("accessToken")?.value) {
+  //   return NextResponse.json({
+  //     success: false,
+  //     status: 400,
+  //     message: "Not Found",
+  //   });
+  // }
   try {
     await dbConnect();
     const detelsOfPage = await DetelsOfThePageSchema.findById(id);
