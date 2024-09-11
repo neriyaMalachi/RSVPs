@@ -5,7 +5,7 @@ import { useStore } from "@/context/store";
 import { MdDelete } from "react-icons/md";
 import axios, { AxiosRequestConfig } from "axios";
 import React, { useEffect, useState } from "react";
-import Futer from "@/pages/components/Futer";
+import Futer from "@/pages/componentForAdmin/Futer";
 import toast, { Toaster } from "react-hot-toast";
 import SecureAdminFils from "@/pages/componentForAdmin/SecureAdminFils";
 
