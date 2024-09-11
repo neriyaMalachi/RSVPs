@@ -30,7 +30,7 @@ const Page = () => {
 
   const deleteGustse = async (id: AxiosRequestConfig) => {
     const isConfirmed = window.confirm(
-      "האם אתה בטוח שאתה רוצה למחוק את האורח הזה?"
+      "האם אתה בטוח שאתה רוצה למחוק את האורח ?"
     );
 
     if (!isConfirmed) {
