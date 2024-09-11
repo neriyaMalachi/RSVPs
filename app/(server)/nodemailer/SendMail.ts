@@ -30,7 +30,6 @@ const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
     .get(`https://rsv-ps.vercel.app/api/DitelsOfThePage`)
     .then((res) => {
       let detels = res.data.data;
-      console.log("eeeeeeeeeeeee",GuestsEmail);
 
       const mailOptions = {
         from: "nmambition2022@gmail.com",
