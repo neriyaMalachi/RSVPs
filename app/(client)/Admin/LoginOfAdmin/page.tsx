@@ -64,6 +64,7 @@ const Page = () => {
             <h2 className="text-2xl font-bold mb-6">הכנס איימיל</h2>
             <input
               type="email"
+              checked
               className="border p-2 mb-4 w-full text-right"
               placeholder="abcde@gmail.com"
               value={email}
@@ -81,6 +82,7 @@ const Page = () => {
             <h2 className="text-2xl font-bold mb-6">קוד אימות</h2>
             <input
               type="text"
+              checked
               className="border p-2 mb-4 w-full"
               placeholder="Enter the code"
               value={code}
