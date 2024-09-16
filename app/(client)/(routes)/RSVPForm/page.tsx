@@ -8,6 +8,7 @@ import { ClipLoader } from "react-spinners";
 const Page = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +28,7 @@ const Page = () => {
       [name]: value,
     });
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     setIsLoading(true);
     e.preventDefault();
@@ -34,8 +36,6 @@ const Page = () => {
       await axios
         .post(`/api/guests`, formData)
         .then((results) => {
-          console.log(results.data.status);
-
           if (results.data.status === 201) {
             setFormData({
               name: "",
@@ -51,20 +51,18 @@ const Page = () => {
           } else if (results.data.status === 400) {
             setIsLoading(false);
             toast.error("פרטיך כבר קיימים במערכת");
-          } else {
-            setIsLoading(false);
-            toast.error("!1 בעיה בפרטים או שנרשמת כבר");
           }
         })
         .catch((error: any) => {
           setIsLoading(false);
-          toast.error("! 2בעיה בפרטים או שנרשמת כבר");
+          toast.error(error);
         });
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
-      toast.error("! 3בעיה בפרטים או שנרשמת כבר");
+      toast.error(error);
     }
   };
+
   const editSideFrends = (e: any) => {
     setFormData((val) => ({ ...val, side: e.target.value }));
   };

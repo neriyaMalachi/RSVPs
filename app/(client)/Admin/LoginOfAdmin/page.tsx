@@ -1,7 +1,9 @@
 "use client";
+import Louding from "@/pages/components/Louding";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -9,9 +11,12 @@ const Page = () => {
   const [token, setToken] = useState();
   const [step, setStep] = useState(1);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const route = useRouter();
 
   const sendCode = async () => {
+    setLoading(true);
     try {
       await axios
         .post(`/api/ValidationEmail`, { email })
@@ -22,22 +27,25 @@ const Page = () => {
             setStep(2);
             setMessage("נשלח אליך קוד לאימייל");
           }
+          setLoading(false);
           setToken(results.data);
         })
         .catch((error) => {
+          setLoading(false);
           console.log(error);
         });
     } catch (error) {
       setMessage("שגיאה באיימיל");
+      setLoading(false);
     }
   };
 
   const verifyCode = async () => {
+    setLoading(true);
     try {
       await axios
         .post(`/api/ValidationCode`, { token, code })
         .then((results) => {
-          console.log(results.data.status);
           if (results.data.status === 401) {
             setMessage("קוד לא תקין , נסה שנית");
           } else {
@@ -47,13 +55,16 @@ const Page = () => {
             route.push("/Admin/AllGuests");
             setMessage("התחברת בהצלחה למשך שעה אחת");
           }
+          setLoading(false);
         })
         .catch((error) => {
           console.log(error);
+          setLoading(false);
         });
     } catch (error) {
       setMessage("קוד לא תקין או עבר זמן ההתחברות");
     }
+    setLoading(false);
   };
 
   return (
@@ -74,7 +85,12 @@ const Page = () => {
               onClick={sendCode}
               className="bg-blue-500 text-white p-2 rounded w-full"
             >
-              התחבר
+              {!loading ? (<>התחבר</>) : (<ClipLoader
+              color={"blue"}
+              size={20}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />)}
             </button>
           </>
         ) : (
@@ -82,7 +98,6 @@ const Page = () => {
             <h2 className="text-2xl font-bold mb-6">קוד אימות</h2>
             <input
               type="text"
-              checked
               className="border p-2 mb-4 w-full"
               placeholder="Enter the code"
               value={code}
@@ -92,7 +107,12 @@ const Page = () => {
               onClick={verifyCode}
               className="bg-blue-500 text-white p-2 rounded w-full"
             >
-              אמת קוד
+              {!loading ? <>אמת קוד</> : <ClipLoader
+              color={"blue"}
+              size={20}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />}
             </button>
           </>
         )}

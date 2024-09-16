@@ -36,8 +36,6 @@ const EditGuests = (guest: any) => {
   const editguestsFunction = async (e: any) => {
     setIsLoading(true);
     e.preventDefault();
-    console.log(formData);
-
     await axios
       .put(`/api/guests`, formData)
       .then(function (res) {

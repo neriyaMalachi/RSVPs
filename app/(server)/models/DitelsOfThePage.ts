@@ -55,6 +55,5 @@ const DetelsOfThePage =
   mongoose.models.DetelsOfThePage ||
   mongoose.model("DetelsOfThePage", DetelsOfThePageSchema);
 
-console.log("Model initialized:", DetelsOfThePage);
 
 export default DetelsOfThePage;

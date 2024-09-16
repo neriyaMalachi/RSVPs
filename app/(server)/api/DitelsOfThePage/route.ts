@@ -37,7 +37,6 @@ export async function PUT(req: NextRequest) {
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const id = "66b91c2fbc80906306b21597";
-  console.log("in route get");
   try {
     await dbConnect();
     const detelsOfPage = await DetelsOfThePageSchema.findById(id);

@@ -26,8 +26,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (AllGuests) {
       const filePath = path.join(desktopPath || "", "Guests.txt");
-      console.log(filePath);
-
       // קביעת רוחב קבוע לכל עמודה
       const nameWidth = 80;
       const emailWidth = 80;

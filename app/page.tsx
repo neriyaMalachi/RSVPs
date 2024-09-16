@@ -5,6 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { IoMdTime } from "react-icons/io";
 import axios from "axios";
 import Louding from "@/pages/components/Louding";
+import { ClipLoader } from "react-spinners";
 
 // Define the interface for the details of the page
 interface PageDetails {
@@ -24,6 +25,7 @@ interface PageDetails {
 export default function Home() {
   const [detels, setDetels] = useState<PageDetails | null>(null);
   const [louding, setLouding] = useState(true);
+  const [loudingOfButton, setLoudingOfButton] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -67,14 +69,25 @@ export default function Home() {
             <button
               className="bg-slate-50/70 font-Bold_Text text-lg text-black hover:bg-slate-100 p-3 rounded-md"
               onClick={() => {
+                setLoudingOfButton(true)
                 router.push("RSVPForm");
               }}
             >
+                {loudingOfButton ? (
+            <ClipLoader
+              color={"blue"}
+              size={20}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
+            <p>
               לאישור ההגעה
+              </p>
+          )}
             </button>
           </footer>
         </>
       )}
     </div>
-  );
-}
+  )}

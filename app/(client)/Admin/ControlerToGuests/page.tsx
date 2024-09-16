@@ -37,7 +37,6 @@ const Page = () => {
     await axios
       .put(`/api/DitelsOfThePage`, formData)
       .then(function (response) {
-        console.log(response);
         setIsLoading(false)
         toast.success("פרטים עודכנו");
       })

@@ -5,9 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const { token, code } = await req.json();
-
-  console.log("Received code:", token, code);
-
   try {
     // אימות הטוקן והוצאת קוד האימות
     const decoded = verify(token.data, process.env.JWT_SECRET || "") as {
@@ -17,7 +14,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (decoded.verificationCode === code) {
       // יצירת טוקן גישה למשתמש
-      console.log("success");
       const accessToken = sign(
         { email: decoded.email },
         process.env.JWT_SECRET || "",

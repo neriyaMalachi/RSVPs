@@ -160,7 +160,6 @@ const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {
           console.log("Email sent: " + info.response);
         }
       );
-      console.log();
     })
     .catch((error) => {
       console.error("Error fetching API data:", error.message);

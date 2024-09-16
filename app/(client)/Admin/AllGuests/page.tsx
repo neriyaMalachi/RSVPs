@@ -40,8 +40,6 @@ const Page = () => {
     await axios
       .delete(`/api/guests`, { data: { id } })
       .then((results) => {
-        console.log(results.data.message);
-
         ChengeStatusFile(!refresh);
         setGuestEdit("");
         toast.success("נמחק בהצלחה ");

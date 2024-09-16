@@ -2,7 +2,6 @@ import { dbConnect } from "@/app/(server)/lib/mongodb";
 import Guest from "@/app/(server)/models/Guest";
 import { NextRequest, NextResponse } from "next/server";
 import sendRegistrationSuccessEmail from "../../nodemailer/SendMail";
-import jwt from "jsonwebtoken";
 require("@/app/(server)/models/Guest");
 
 export async function GET(req: NextRequest, res: NextResponse) {
@@ -29,10 +28,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
-  console.log(data);
-
   try {
-    sendRegistrationSuccessEmail(data.email);
     await dbConnect();
     const existingGuest = await Guest.findOne({ email: data.email });
     if (existingGuest) {
@@ -41,8 +37,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
         message: "Guest with this email already exists",
       });
     }
-
+    
     await Guest.create(data);
+    sendRegistrationSuccessEmail(data.email);
     return NextResponse.json({ status: 201, success: true });
   } catch (error: any) {
     return NextResponse.json({ message: error.message, status: 404 });
