@@ -21,6 +21,7 @@ const Futer = () => {
         countOfABrideSide += AllGuests[i].guests;
     }
   };
+
   const getAllGuests = async () => {
     await axios
       .get(`/api/guests`)
@@ -31,6 +32,7 @@ const Futer = () => {
         console.log(error);
       });
   };
+
   useEffect(() => {
     getAllGuests();
   }, [refresh]);
