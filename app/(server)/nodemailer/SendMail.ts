@@ -9,19 +9,7 @@ const transporter = nodemailer.createTransport({
     pass:'pqbv rbiv dqie rtss', // הסיסמה שלך
   },
 });
-interface PageDetails {
-  BrideName: string;
-  GroomName: string;
-  Title: string;
-  Location: string;
-  Year: number;
-  Month: number;
-  Day: number;
-  Hour: number;
-  Minute: number;
-  Description?: string;
-  img?: string;
-}
+
 
 // פונקציה לשליחת מייל אישור הרשמה
 const sendRegistrationSuccessEmail = async (GuestsEmail: any) => {

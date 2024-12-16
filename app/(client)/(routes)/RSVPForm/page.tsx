@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 const Page = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

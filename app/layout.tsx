@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/pages/components/NavBar";
-const inter = Inter({ subsets: ["latin"] });
+import React from "react";
 
 export const metadata: Metadata = {
   title: "אישור הגעה",
   description: "תוכנה לאישורי הגעה",
-  
 };
 
 export default function RootLayout({
@@ -17,10 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <NavBar/>
+      <body>
+        <NavBar />
         {children}
-        </body>
+      </body>
     </html>
   );
 }
